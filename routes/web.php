@@ -1,7 +1,11 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\TransactionController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\User\DashboardUserController;
 use Illuminate\Support\Facades\Auth;
@@ -24,9 +28,14 @@ Route::get('/categories', [HomeController::class,'categories'])->name('categorie
 
 Route::prefix('admin')
         ->middleware('isAdmin')
+        ->name('admin.')
         ->group(function () {
             Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
             route::resource('admin', AdminController::class);
+            route::resource('category', CategoryController::class);
+            route::resource('users', UserController::class);
+            route::resource('products', ProductController::class);
+            route::resource('transactions', TransactionController::class);
         });
 
 Route::prefix('user')
