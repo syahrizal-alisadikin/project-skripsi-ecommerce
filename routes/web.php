@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\User\DashboardUserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -16,9 +18,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('pages.home');
-});
+Route::get('/', [HomeController::class,'index'])->name('home');
+Route::get('/contact', [HomeController::class,'kontak'])->name('kontak');
+Route::get('/categories', [HomeController::class,'categories'])->name('categories');
 
 Route::prefix('admin')
         ->middleware('isAdmin')
@@ -27,6 +29,12 @@ Route::prefix('admin')
             route::resource('admin', AdminController::class);
         });
 
+Route::prefix('user')
+        ->middleware('auth')
+        ->group(function () {
+            Route::get('/', [DashboardUserController::class, 'index'])->name('user.index');
+            Route::get('/transactions', [DashboardUserController::class, 'transactions'])->name('transactions.user.index');
+            Route::get('/setting', [DashboardUserController::class, 'setting'])->name('setting.user.index');
+        });
 Auth::routes();
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -14,7 +14,31 @@
                     <span>Dashboard</span>
                 </a>
             </li>
-         
+            <li class="{{ setActive('admin/admin') }}">
+                <a class="nav-link" href="{{ route('admin.index') }}">
+                    <i class="fas fa-users"></i>
+                    <span>Users</span>
+                </a>
+            </li>
+            <li class="{{ setActive('admin/admin') }}">
+                <a class="nav-link" href="{{ route('admin.index') }}">
+                    <i class="fas fa-users"></i>
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li class="{{ setActive('admin/admin') }}">
+                <a class="nav-link" href="{{ route('admin.index') }}">
+                    <i class="fas fa-users"></i>
+                    <span>Products</span>
+                </a>
+            </li>
+            <li class="{{ setActive('admin/admin') }}">
+                <a class="nav-link" href="{{ route('admin.index') }}">
+                    <i class="fas fa-users"></i>
+                    <span>Transactions</span>
+                </a>
+            </li>
+            
             <li class="{{ setActive('admin/admin') }}">
                 <a class="nav-link" href="{{ route('admin.index') }}">
                     <i class="fas fa-users"></i>
