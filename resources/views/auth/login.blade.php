@@ -80,6 +80,9 @@
                                         <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
                                             Login
                                         </button>
+                                        <a href="{{ route('register') }}" class="btn btn-secondary btn-lg btn-block" tabindex="4">
+                                            register
+                                        </a>
                                     </div>
                                 </form>
 
