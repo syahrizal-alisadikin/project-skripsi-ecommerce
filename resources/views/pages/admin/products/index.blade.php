@@ -12,7 +12,8 @@
 
             <div class="card">
                 <div class="card-header">
-                    <h4><i class="fas fa-user"></i> Products</h4>
+                    <a href="{{ route('admin.products.create') }}" class="btn btn-primary" ><i class="fas fa-plus mr-1"></i>Product</a>
+                    
                 </div>
 
                 <div class="card-body">
@@ -22,7 +23,11 @@
                             <thead>
                             <tr>
                                 <th scope="col" style="text-align: center;width: 6%">NO.</th>
+                                <th scope="col">PHOTO</th>
                                 <th scope="col">NAME</th>
+                                <th scope="col">CATEGORIES</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Quantity</th>
                                 
                                 <th scope="col" style="width: 15%;text-align: center">AKSI</th>
                             </tr>
@@ -59,10 +64,25 @@
                 }
                 },
                 {
+                    data: 'image',
+                    name: 'image'
+                },
+                {
                     data: 'name',
                     name: 'name'
                 },
-                
+                {
+                    data: 'categories_id',
+                    name: 'categories_id'
+                },
+                {
+                    data: 'price',
+                    name: 'price'
+                },
+                {
+                    data: 'quantity',
+                    name: 'quantity'
+                },
                 {
                     data: 'action',
                     name: 'action'
@@ -82,9 +102,23 @@
                     "targets": 2, // your case first column
                     "className": "text-center",
                 },
-               
+                {
+                    "targets": 3, // your case first column
+                    "className": "text-center",
+                },
              
-               
+                {
+                    "targets": 4, // your case first column
+                    "className": "text-center",
+                },
+                {
+                    "targets": 5, // your case first column
+                    "className": "text-center",
+                },
+                {
+                    "targets": 6, // your case first column
+                    "className": "text-center",
+                },
                
                
            ]
@@ -107,7 +141,7 @@
                 if (isConfirm) {
                     //ajax delete
                     jQuery.ajax({
-                        url: "/dashboard/admin/"+id,
+                        url: "/admin/products/"+id,
                         data:   {
                             "id": id,
                             "_token": token

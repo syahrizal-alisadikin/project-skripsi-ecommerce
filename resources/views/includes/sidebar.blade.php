@@ -26,7 +26,7 @@
                     <span>Categories</span>
                 </a>
             </li>
-            <li class="{{ setActive('admin/products') }}">
+            <li class="{{ setActive('admin/products'. '*') }}">
                 <a class="nav-link" href="{{ route('admin.products.index') }}">
                     <i class="fas fa-users"></i>
                     <span>Products</span>

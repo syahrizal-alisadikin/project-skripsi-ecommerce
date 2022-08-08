@@ -9,6 +9,7 @@
   </head>
   <body>
    @include('pages.includes.navbar')
+   
  <!-- Page Content -->
     @yield('content-page')
     @include('pages.includes.footer')
