@@ -13,7 +13,7 @@ html, body {
 body {
   background-color: #ecf0f1;
   border: 90px solid #bdc3c7;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 16px;
   color: #34495e;
   padding: 45px;
@@ -23,10 +23,8 @@ a {
   color: #12273c;
   border-bottom: 1px solid #3498db;
   text-decoration: none;
-  -webkit-transition: .5s ease;
-  transition: .5s ease;
+  transition: 0.5s ease;
 }
-
 a:hover {
   color: #34495e;
   border-bottom: 1px solid #bdc3c7;
@@ -45,7 +43,7 @@ pre {
   background: #bdc3c7;
   padding: 20px;
   display: inline-block;
-  font-family: 'Source Code Pro', sans-serif;
+  font-family: "Source Code Pro", sans-serif;
   font-size: 14px;
   border-radius: 15px;
   overflow-x: scroll;
@@ -70,7 +68,6 @@ hr {
   background-color: #ffffff;
   color: #ecf0f1;
 }
-
 #image-preview input, #callback-preview input {
   line-height: 200px;
   font-size: 200px;
@@ -78,7 +75,6 @@ hr {
   opacity: 0;
   z-index: 10;
 }
-
 #image-preview label, #callback-preview label {
   position: absolute;
   z-index: 5;
@@ -112,5 +108,4 @@ hr {
   padding: 20px;
   font-size: 20px;
   text-transform: uppercase;
-}
-/*# sourceMappingURL=application.css.map */
+}/*# sourceMappingURL=application.css.map */

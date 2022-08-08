@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -11,7 +13,7 @@ class HomeController extends Controller
      *
      * @return void
      */
-   
+
 
     /**
      * Show the application dashboard.
@@ -20,7 +22,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('pages.home');
+        $categories = Category::paginate(6);
+        $products = Product::paginate(12);
+
+        return view('pages.home', compact('categories', 'products'));
     }
 
     public function kontak()

@@ -1,9 +1,1 @@
-{
-    "version": 3,
-    "mappings": "AAAA;;;;;;;GAOG",
-    "sources": [
-        "bootstrap-social.scss"
-    ],
-    "names": [],
-    "file": "bootstrap-social.css"
-}
+{"version":3,"sources":["bootstrap-social.scss"],"names":[],"mappings":"AAAA;;;;;;;EAAA","file":"bootstrap-social.css"}

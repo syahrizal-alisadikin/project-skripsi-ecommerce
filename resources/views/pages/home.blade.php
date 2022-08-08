@@ -45,114 +45,44 @@
         </div>
       </div>
       <div class="row">
-        <div
-          class="col-6 col-md-3 col-lg-2"
-          data-aos="fade-up"
-          data-aos-delay="100"
-        >
-          <a class="component-categories d-block" href="#">
-            <div class="categories-image">
-              <img
-                src="https://store.appdev.my.id/storage/categories/qRRJFJydITSIGQMBTKBj6IdlQsu5kR3zp5ucOLid.png"
-                alt="Gadgets Categories"
-                class="w-100"
-              />
-            </div>
-            <p class="categories-text">
-              Gadgets
-            </p>
-          </a>
-        </div>
-        <div
-          class="col-6 col-md-3 col-lg-2"
-          data-aos="fade-up"
-          data-aos-delay="200"
-        >
-          <a class="component-categories d-block" href="#">
-            <div class="categories-image">
-              <img
-                src="https://store.appdev.my.id/storage/categories/qRRJFJydITSIGQMBTKBj6IdlQsu5kR3zp5ucOLid.png"
-                alt="Furniture Categories"
-                class="w-100"
-              />
-            </div>
-            <p class="categories-text">
-              Furniture
-            </p>
-          </a>
-        </div>
-        <div
-          class="col-6 col-md-3 col-lg-2"
-          data-aos="fade-up"
-          data-aos-delay="300"
-        >
-          <a class="component-categories d-block" href="#">
-            <div class="categories-image">
-              <img
-                src="https://store.appdev.my.id/storage/categories/qRRJFJydITSIGQMBTKBj6IdlQsu5kR3zp5ucOLid.png"
-                alt="Makeup Categories"
-                class="w-100"
-              />
-            </div>
-            <p class="categories-text">
-              Makeup
-            </p>
-          </a>
-        </div>
-        <div
-          class="col-6 col-md-3 col-lg-2"
-          data-aos="fade-up"
-          data-aos-delay="400"
-        >
-          <a class="component-categories d-block" href="#">
-            <div class="categories-image">
-              <img
-                src="https://store.appdev.my.id/storage/categories/qRRJFJydITSIGQMBTKBj6IdlQsu5kR3zp5ucOLid.png"
-                alt="Sneaker Categories"
-                class="w-100"
-              />
-            </div>
-            <p class="categories-text">
-              Sneaker
-            </p>
-          </a>
-        </div>
-        <div
-          class="col-6 col-md-3 col-lg-2"
-          data-aos="fade-up"
-          data-aos-delay="500"
-        >
-          <a class="component-categories d-block" href="#">
-            <div class="categories-image">
-              <img
-                src="https://store.appdev.my.id/storage/categories/qRRJFJydITSIGQMBTKBj6IdlQsu5kR3zp5ucOLid.png"
-                alt="Tools Categories"
-                class="w-100"
-              />
-            </div>
-            <p class="categories-text">
-              Tools
-            </p>
-          </a>
-        </div>
-        <div
-          class="col-6 col-md-3 col-lg-2"
-          data-aos="fade-up"
-          data-aos-delay="600"
-        >
-          <a class="component-categories d-block" href="#">
-            <div class="categories-image">
-              <img
-                src="https://store.appdev.my.id/storage/categories/qRRJFJydITSIGQMBTKBj6IdlQsu5kR3zp5ucOLid.png"
-                alt="Baby Categories"
-                class="w-100"
-              />
-            </div>
-            <p class="categories-text">
-              Baby
-            </p>
-          </a>
-        </div>
+       @forelse ($categories as $item)
+       <div
+       class="col-6 col-md-3 col-lg-2"
+       data-aos="fade-up"
+       data-aos-delay="100"
+     >
+       <a class="component-categories d-block" href="#">
+         <div class="categories-image">
+           <img
+             src="{{ Storage::url($item->photo) }}"
+             alt="Gadgets Categories"
+             class="w-100"
+           />
+         </div>
+         <p class="categories-text">
+           {{ $item->name }}
+         </p>
+       </a>
+     </div>
+       @empty
+       <div
+       class="col-6 col-md-3 col-lg-3"
+       data-aos="fade-up"
+       data-aos-delay="100"
+     >
+       <a class="component-categories d-block" href="javascript:void(0)">
+        
+         <p class="categories-text">
+          belum ada category
+         </p>
+       </a>
+     </div>
+       @endforelse
+       
+       
+       
+       
+       
       </div>
     </div>
   </section>
@@ -160,31 +90,44 @@
     <div class="container">
       <div class="row">
         <div class="col-12" data-aos="fade-up">
-          <h5>New Products</h5>
+         <b> <h5>New Products</h5></b>
         </div>
       </div>
       <div class="row">
-        <div
-          class="col-6 col-md-4 col-lg-3"
-          data-aos="fade-up"
-          data-aos-delay="100"
-        >
-       
-          <div class="card border-0 shadow rounded-md">
-            <div class="card-image">
-              <img src="https://store.appdev.my.id/storage/products/YL0t4nMXdKVXjczVipSw4GhNllAc5DR0p4H4L1Ny.jpeg" class="w-100" style="height: 15em; object-fit: cover; border-top-left-radius: 0.25rem; border-top-right-radius: 0.25rem;">
-            </div>
-            <div class="card-body">
-              <a href="/product/macbook-pro-16-m1-max" class="card-title font-weight-bold" style="font-size: 20px;">Macbook Pro 16</a>
-             
-              <div class="price font-weight-bold mt-2" > Rp. 38.000.000</div>
-              <a href="/product/macbook-pro-16-m1-max" class="btn btn-primary btn-md mt-3 btn-block shadow-md">LIHAT PRODUK</a>
-            </div>
-          </div>
-         
-        </div>
-        
-       
+             @forelse ($products as $item)
+             <div
+             class="col-6 col-md-4 col-lg-3"
+             data-aos="fade-up"
+             data-aos-delay="100"
+           >
+          
+             <div class="card border-0 shadow rounded-md">
+               <div class="card-image">
+                 <img src="{{ Storage::url($item->galleries->first()->photos) }}" class="w-100" style="height: 15em; object-fit: cover; border-top-left-radius: 0.25rem; border-top-right-radius: 0.25rem;">
+               </div>
+               <div class="card-body">
+                 <a href="/product/macbook-pro-16-m1-max" class="card-title font-weight-bold" style="font-size: 20px;">{{ $item->name }}</a>
+                
+                 <div class="price font-weight-bold mt-2" > {{ moneyFormat($item->price) }}</div>
+                 <a href="/product/macbook-pro-16-m1-max" class="btn btn-primary btn-md mt-3 btn-block shadow-md">LIHAT PRODUK</a>
+               </div>
+             </div>
+            
+           </div>
+             @empty
+             <div
+             class="col-6 col-md-3 col-lg-3"
+             data-aos="fade-up"
+             data-aos-delay="100"
+           >
+             <a class="component-categories d-block" href="javascript:void(0)">
+              
+               <p class="categories-text">
+                belum ada product
+               </p>
+             </a>
+           </div>
+             @endforelse
       </div>
     </div>
   </section>
