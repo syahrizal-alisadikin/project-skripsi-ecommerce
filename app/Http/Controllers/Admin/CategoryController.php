@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use DataTables;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -16,21 +18,23 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        if(request()->ajax())
-        {
+        if (request()->ajax()) {
             $query = Category::query();
             return DataTables::of($query)
-            ->addIndexColumn()
-            ->addColumn('action', function ($data) {
+                ->addIndexColumn()
+                ->addColumn('action', function ($data) {
 
-                $edit = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">Edit</a>';
-                $delete = '<a href="javascript:void(0)" onClick="Delete(this.id)" id="' . $data->email . '" class="delete btn btn-danger btn-sm">Delete </a>';
+                    $edit = '<a href="' . route('admin.category.edit', $data->id) . '" class="edit btn btn-primary btn-sm">Edit</a>';
+                    $delete = '<a href="javascript:void(0)" onClick="Delete(this.id)" id="' . $data->id . '" class="delete btn btn-danger btn-sm">Delete </a>';
 
-                return $edit . ' ' . $delete;
-            })
-            
-            ->rawColumns(['action'])
-            ->make(true); 
+                    return $edit . ' ' . $delete;
+                })
+                ->editColumn('photo', function ($row) {
+                    return '<img src="' . Storage::url($row->photo) . '" width="100px" height="100px">';
+                })
+
+                ->rawColumns(['action', 'photo'])
+                ->make(true);
         }
 
         return view('pages.admin.category.index');
@@ -43,7 +47,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.admin.category.create');
     }
 
     /**
@@ -54,7 +58,18 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // validate the data
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $data = $request->all();
+        $data['slug'] = Str::slug($request->name);
+        $data['photo'] = $request->file('photo')->store('assets/category', 'public');
+
+        Category::create($data);
+        return redirect()->route('admin.category.index')->with('success', 'Category created successfully');
     }
 
     /**
@@ -74,10 +89,11 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
-        //
+        return view('pages.admin.category.edit', compact('category'));
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -86,9 +102,31 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category)
     {
-        //
+        // Validase the data
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+
+        $data = $request->all();
+
+        $data['slug'] = Str::slug($request->name);
+
+        if ($request->hasFile('photo')) {
+            $request->validate([
+                'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+            $data['photo'] = $request->file('photo')->store('assets/category', 'public');
+            if (Storage::exists('public/' . $category->photo)) {
+
+                Storage::disk('local')->delete('public/' . $category->photo);
+            }
+        }
+        $category->update($data);
+
+        return redirect()->route('admin.category.index')->with('success', 'Category updated successfully');
     }
 
     /**
@@ -99,6 +137,13 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = Category::find($id);
+        $category->delete();
+        return response()->json(
+            [
+                'status' => "success",
+                'message' => "Category deleted successfully"
+            ]
+        );
     }
 }

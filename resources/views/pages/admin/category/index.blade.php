@@ -1,4 +1,4 @@
-@extends('layouts.admin', ['title' => 'Dashboard Admin'])
+@extends('layouts.admin', ['title' => 'Dashboard Admin Category'])
 
 @section('content')
 
@@ -11,8 +11,11 @@
         <div class="section-body">
 
             <div class="card">
-                <div class="card-header">
+                <div class="card-header d-flex justify-content-between">
                     <h4><i class="fas fa-user"></i> Category</h4>
+                    <div class="input-group-prepend">
+                        <a href="{{ route('admin.category.create') }}" class="btn btn-primary" ><i class="fas fa-plus mr-1"></i>Category</a>
+                    </div>
                 </div>
 
                 <div class="card-body">
@@ -22,6 +25,7 @@
                             <thead>
                             <tr>
                                 <th scope="col" style="text-align: center;width: 6%">NO.</th>
+                                <th scope="col">Photo</th>
                                 <th scope="col">NAME</th>
                                 
                                 <th scope="col" style="width: 15%;text-align: center">AKSI</th>
@@ -59,6 +63,10 @@
                 }
                 },
                 {
+                    data: 'photo',
+                    name: 'photo'
+                },
+                {
                     data: 'name',
                     name: 'name'
                 },
@@ -80,6 +88,10 @@
                 },
                 {
                     "targets": 2, // your case first column
+                    "className": "text-center",
+                },
+                {
+                    "targets": 3, // your case first column
                     "className": "text-center",
                 },
                
@@ -107,7 +119,7 @@
                 if (isConfirm) {
                     //ajax delete
                     jQuery.ajax({
-                        url: "/dashboard/admin/"+id,
+                        url: "/admin/category/"+id,
                         data:   {
                             "id": id,
                             "_token": token

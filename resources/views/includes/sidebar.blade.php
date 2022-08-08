@@ -20,7 +20,7 @@
                     <span>Users</span>
                 </a>
             </li>
-            <li class="{{ setActive('admin/category') }}">
+            <li class="{{ setActive('admin/category'. '*') }}">
                 <a class="nav-link" href="{{ route('admin.category.index') }}">
                     <i class="fas fa-users"></i>
                     <span>Categories</span>
