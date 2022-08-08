@@ -25,6 +25,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/contact', [HomeController::class, 'kontak'])->name('kontak');
 Route::get('/categories', [HomeController::class, 'categories'])->name('categories');
+Route::get('/categories/{slug}', [HomeController::class, 'category'])->name('category');
+Route::get('/product/{slug}', [HomeController::class, 'productDetail'])->name('product');
 
 Route::prefix('admin')
     ->middleware('isAdmin')

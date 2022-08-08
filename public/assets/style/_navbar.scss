@@ -2,7 +2,15 @@
     padding-top: 15px;
 
     //   background-color: #fff !important;
-
+    ul {
+        li.active{
+            a{
+                color: #198754 !important;
+                font-weight: bold;
+            }
+            // border-bottom: 3px solid #198754 !important;
+        }
+    }
     .nav-item {
         .nav-link {
             @media (min-width: 992px) {
@@ -10,6 +18,8 @@
                 margin-right: 10px;
             }
         }
+
+       
     }
 
     .profile-picture {

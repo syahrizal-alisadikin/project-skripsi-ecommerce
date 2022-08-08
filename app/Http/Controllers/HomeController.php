@@ -35,6 +35,24 @@ class HomeController extends Controller
 
     public function categories()
     {
-        return view('pages.categories');
+        $categories = Category::paginate(6);
+        $products = Product::paginate(12);
+
+        return view('pages.categories', compact('categories', 'products'));
+    }
+
+    public function category($slug)
+    {
+        $categories = Category::paginate(6);
+
+        $category = Category::where('slug', $slug)->first();
+        $products = Product::where('categories_id', $category->id)->paginate(12);
+        return view('pages.category', compact('category', 'products', 'categories'));
+    }
+
+    public function productDetail($slug)
+    {
+        $product = Product::where('slug', $slug)->with('galleries')->first();
+        return view('pages.product-detail', compact('product'));
     }
 }

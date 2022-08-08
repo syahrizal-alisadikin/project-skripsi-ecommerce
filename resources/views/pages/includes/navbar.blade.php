@@ -21,13 +21,13 @@ data-aos="fade-down"
    
   <div class="collapse navbar-collapse" id="navbarResponsive">
     <ul class="navbar-nav ms-auto">
-      <li class="nav-item active">
+      <li class="nav-item {{ setActive('/') }}">
         <a class="nav-link" href="/">Home </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/categories.html">Categories</a>
+      <li class="nav-item {{ setActive('categories' . '*') }}">
+        <a class="nav-link" href="{{ route('categories') }}">Categories</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item {{ setActive('contact') }}">
         <a class="nav-link" href="/contact">Kontak</a>
       </li>
      

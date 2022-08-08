@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap");
 body {
-  background: #ffffff;
+  background: #ffffff !important;
 }
 
 .page-content {
@@ -21,6 +21,10 @@ footer p {
 
 .navbar-store {
   padding-top: 15px;
+}
+.navbar-store ul li.active a {
+  color: #198754 !important;
+  font-weight: bold;
 }
 @media (min-width: 992px) {
   .navbar-store .nav-item .nav-link {
