@@ -39,10 +39,17 @@
                 </a>
             </li>
             
-            <li class="{{ setActive('admin/admin') }}">
+            <li class="{{ setActive('admin/admin' . '*') }}">
                 <a class="nav-link" href="{{ route('admin.admin.index') }}">
                     <i class="fas fa-users"></i>
                     <span>Admin</span>
+                </a>
+            </li>
+
+            <li class="{{ setActive('admin/setting') }}">
+                <a class="nav-link" href="{{ route('admin.setting.index') }}">
+                    <i class="fas fa-cog"></i>
+                    <span>Setting Akun</span>
                 </a>
             </li>
          

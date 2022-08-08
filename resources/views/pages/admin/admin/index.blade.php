@@ -12,7 +12,7 @@
 
             <div class="card">
                 <div class="card-header">
-                    <h4><i class="fas fa-users"></i> Admin</h4>
+                    <a href="{{ route('admin.admin.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Admin</a>
                 </div>
 
                 <div class="card-body">

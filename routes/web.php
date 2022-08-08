@@ -38,6 +38,10 @@ Route::prefix('admin')
         Route::post('/upload-gallery', [ProductController::class, 'productGalleryUpload'])->name('upload.gallery');
         Route::get('/product-gallery-delete/{id}', [ProductController::class, 'productGalleryDelete'])->name('product.gallery.delete');
         route::resource('transactions', TransactionController::class);
+
+        // setting akun
+        Route::get('/setting', [AdminController::class, 'setting'])->name('setting.index');
+        Route::put('/setting', [AdminController::class, 'settingUpdate'])->name('setting.update');
     });
 
 Route::prefix('user')

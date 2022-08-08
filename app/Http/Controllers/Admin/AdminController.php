@@ -22,7 +22,7 @@ class AdminController extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function ($data) {
 
-                    $edit = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">Edit</a>';
+                    $edit = '<a href=" ' . route('admin.admin.edit', $data->id) . ' " class="edit btn btn-primary btn-sm">Edit</a>';
                     $delete = '<a href="javascript:void(0)" onClick="Delete(this.id)" id="' . $data->email . '" class="delete btn btn-danger btn-sm">Delete </a>';
 
                     return $edit . ' ' . $delete;
@@ -46,7 +46,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.admin.admin.create');
     }
 
     /**
@@ -57,7 +57,22 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email',
+            'phone' => 'required|string|max:255',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+        // Simpan data ke database
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'password' => bcrypt($request->password),
+            'roles' => 'ADMIN',
+        ]);
+        // Redirect ke halaman admin
+        return redirect()->route('admin.admin.index')->with('success', 'Data berhasil ditambahkan');
     }
 
     /**
@@ -79,7 +94,9 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        //
+        //edit admin
+        $admin = User::find($id);
+        return view('pages.admin.admin.edit', compact('admin'));
     }
 
     /**
@@ -91,7 +108,18 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // update admin
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $id,
+            'phone' => 'required|string|max:255',
+        ]);
+        $admin = User::find($id);
+        $admin->name = $request->name;
+        $admin->email = $request->email;
+        $admin->phone = $request->phone;
+        $admin->save();
+        return redirect()->route('admin.admin.index')->with('success', 'Admin updated successfully');
     }
 
     /**
@@ -105,5 +133,38 @@ class AdminController extends Controller
         $user = User::where('email', $id)->first();
         $user->delete();
         return response()->json(['status' => 'success']);
+    }
+
+    public function setting(Request $request)
+    {
+        return view('pages.admin.admin.setting');
+    }
+
+    public function settingUpdate(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+            'phone' => 'required|string|max:255',
+        ]);
+        $data = $request->all();
+
+        $user = User::findOrFail(auth()->user()->id);
+        if ($request->password) {
+            // validasi password
+            $request->validate([
+                'password' => 'required|string|min:6|confirmed',
+            ]);
+            $data['password'] = bcrypt($request->password);
+            $user->update($data);
+        } else {
+            $user->update([
+                'name'      => $request->input('name'),
+                // 'last_name' => $request->input('last_name'),
+                'email'     => $request->input('email'),
+                'phone'     => $request->input('phone'),
+            ]);
+        }
+        return redirect()->route('admin.setting.index')->with('success', 'Data berhasil diubah');
     }
 }
