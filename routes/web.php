@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\User\DashboardUserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -52,5 +53,13 @@ Route::prefix('user')
         Route::get('/', [DashboardUserController::class, 'index'])->name('user.index');
         Route::get('/transactions', [DashboardUserController::class, 'transactions'])->name('transactions.user.index');
         Route::get('/setting', [DashboardUserController::class, 'setting'])->name('setting.user.index');
+
+        // Ad To Cart
+        Route::post('/cart/{id}', [CartController::class,'addCart'])->name('addToCart');
+
+        Route::get('/cart', [CartController::class,'index'])->name('cart.index');
+        Route::delete('/cart/{id}', [CartController::class,'destroy'])->name('delete-cart');
+        Route::get('/province', [CartController::class,'Provinces'])->name('api-provinces');
+        Route::get('/regencies/{id}', [CartController::class,'Regencies'])->name('api-regencies');
     });
 Auth::routes();

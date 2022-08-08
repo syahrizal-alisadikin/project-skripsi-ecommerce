@@ -9,3 +9,36 @@
     once: true
 });
 </script>
+<script>
+    //active select2 
+    $(document).ready(function () {
+        $('#select').select2({
+            theme: 'bootstrap4',
+            width: 'style',
+        });
+    });
+    //flash message
+    @if(session()->has('success'))
+    swal({
+        type: "success",
+        icon: "success",
+        title: "BERHASIL!",
+        text: "{{ session('success') }}",
+        timer: 3500,
+        showConfirmButton: false,
+        showCancelButton: false,
+        buttons: false,
+    });
+    @elseif(session()->has('error'))
+    swal({
+        type: "error",
+        icon: "error",
+        title: "GAGAL!",
+        text: "{{ session('error') }}",
+        timer: 3500,
+        showConfirmButton: false,
+        showCancelButton: false,
+        buttons: false,
+    });
+    @endif
+</script>

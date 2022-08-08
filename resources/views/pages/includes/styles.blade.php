@@ -9,4 +9,6 @@
 <link href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css" rel="stylesheet">
 
 <link href="{{ asset('assets/style/main.css') }}" rel="stylesheet" />
+<script src="{{ asset('assets/js/sweetalert.min.js') }}"></script>
+
 <title>{{ $titlePage ?? config('app.name') }}</title>

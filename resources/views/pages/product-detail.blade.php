@@ -74,7 +74,7 @@
                               </div>
                               <div class="stock" data-aos="zoom-in">
                                   @auth
-                                  <form action="" method="POST" enctype="multipart/form-data">
+                                  <form action="{{ route('addToCart',$product->id) }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     Quantity : 
                                     {{ $product->quantity }}
