@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Province;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use DataTables;
@@ -29,6 +30,7 @@ class DashboardUserController extends Controller
 
     public function setting()
     {
-        return view('pages.user.setting');
+        $provinces = Province::all();
+        return view('pages.user.setting',compact('provinces'));
     }
 }

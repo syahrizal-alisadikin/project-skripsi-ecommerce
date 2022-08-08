@@ -4,6 +4,8 @@
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
  <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
+ <script src="{{ asset('assets/modules/select2/dist/js/select2.full.min.js') }}"></script>
+
 <script>
     AOS.init({
     once: true

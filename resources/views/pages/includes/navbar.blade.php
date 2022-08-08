@@ -46,10 +46,10 @@ data-aos="fade-down"
     </ul>
     @auth
     <ul class="navbar-nav  d-none d-lg-flex">
-           <li class="nav-item dropdown">
+           <li class="nav-item dropdown {{ setActive('user') }}">
              <a
                class="nav-link"
-               href="#"
+               href="{{ route('user.index') }}"
                id="navbarDropdown"
                role="button"
                data-toggle="dropdown"
@@ -66,17 +66,16 @@ data-aos="fade-down"
            
            </li>
            <li class="nav-item">
-             <a class="nav-link d-inline-block" href="#">
-                Cart
-               {{-- @php
-                   $carts = App\Models\Cart::where('fk_user_id',Auth::user()->id)->count();
+             <a class="nav-link d-inline-block" href="{{ route('cart.index') }}">
+               @php
+                   $carts = App\Models\Cart::where('user_id',Auth::user()->id)->count();
                @endphp
                @if ($carts > 0 )
-               <img src="/images/icon-cart-filled.svg" alt="">
+               <img src="{{ asset('assets') }}/img/icon-cart-filled.svg" alt="">
                <div class="cart-badge">{{$carts}}</div>
                @else
-               <img src="/images/icon-cart-epty.svg" alt="">
-               @endif --}}
+               <img src="{{ asset('assets') }}/img/icon-cart-empty.svg" alt="">
+               @endif
              
              </a>
            </li>
