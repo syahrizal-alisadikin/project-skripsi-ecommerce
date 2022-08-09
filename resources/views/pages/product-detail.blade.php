@@ -47,7 +47,7 @@
                   <img
                     :src="photo.url"
                     class=" thumbnail-image"
-                    style="max-height: 200px; max-width: 200px;"
+                    style="height: 150px; width: 150px;"
                     :class="{ active: index == activePhoto }"
                     alt=""
                   />
