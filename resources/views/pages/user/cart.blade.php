@@ -153,7 +153,7 @@
             <div class="col-md-4">
               <div class="form-group">
                 <label for="province">Province</label>
-                <select name="fk_provinces_id"  id="fk_provinces_id" v-if="provinces" v-model="provinces_id" class="form-control">
+                <select name="fk_provinces_id"  id="select" v-if="provinces" v-model="provinces_id" class="form-control">
                 <option v-for="province in provinces" :value="province.id">@{{ province.name }}</option>
                 </select>
                 <select v-else class="form-control"></select>
@@ -162,7 +162,7 @@
             <div class="col-md-4">
               <div class="form-group">
                 <label for="fk_regencies_id">City</label>
-               <select name="city_id" @change="GetCourier()"  id="fk_regencies_id" v-if="regencies" v-model="city_id" class="form-control">
+               <select name="city_id" @change="GetCourier()"  id="select" v-if="regencies" v-model="city_id" class="form-control">
                 <option v-for="regencie in regencies" :value="regencie.id">@{{ regencie.name }}</option>
                 </select>
                 <select v-else class="form-control"></select>
@@ -216,12 +216,12 @@
     <script src="{{ asset('assets/vendor/vue/vue.js') }}"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-    <script>
+    {{-- <script>
      $(document).ready(function() {
         // console.log('berhasil');
           $('.fk_provinces_id').select2();
       });
-      </script>
+      </script> --}}
     <script>
      
       var locations = new Vue({
@@ -255,7 +255,7 @@
                 
                 axios.get('{{ url('user/regencies') }}/' + self.provinces_id)
                     .then(function(response){
-                      console.log(response.data)
+                      // console.log(response.data)
                     self.regencies = response.data;
                      
               });
