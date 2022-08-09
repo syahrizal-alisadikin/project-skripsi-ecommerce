@@ -31,7 +31,7 @@
                 :key="photos[activePhoto].id"
                 :src="photos[activePhoto].url"
                 class=" main-image"
-                style="max-width: 300px; max-height: 300px;"
+                style="width: 300px; height: 300px;"
                 alt=""
               />
             </transition>
