@@ -10,7 +10,7 @@
             <div class="card">
                 <div class="card-body">
                     <h3>Setting {{ Auth::user()->name }}</h3>
-                    <form action="{{ route('admin.setting.update') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('user.setting.update') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="row">
@@ -94,7 +94,7 @@
                                                 </option>
                                             @endforeach
                                         </select>
-                                        @error('email')
+                                        @error('province_id')
                                         <div class="invalid-feedback" style="display: block">
                                             {{ $message }}
                                         </div>
@@ -103,10 +103,11 @@
                                    
                                     <div class="form-group mb-2">
                                         <label>Kota</label>
-                                        <input type="number" name="phone" value="{{ old('phone',Auth::user()->phone) }}" placeholder="Masukkan Phone"
-                                            class="form-control @error('phone') is-invalid @enderror">
+                                        <select name="regencies_id" class="form-control" id="regencies_id">
+                                            <option value="">Pilih Kota</option>
+                                        </select>
             
-                                        @error('phone')
+                                        @error('regencies_id')
                                         <div class="invalid-feedback" style="display: block">
                                             {{ $message }}
                                         </div>
@@ -149,6 +150,25 @@
     };
 
     tinymce.init(editor_config);
+</script>
+
+<script>
+    $(document).ready(function(){
+        $('#select').change(function(){
+            var province_id = $(this).val();
+            $.ajax({
+                url : "{{ url('/') }}/user/regencies/"+province_id,
+                type : "GET",
+                dataType : "JSON",
+                success : function(data){
+                    $('#regencies_id').empty();
+                    $.each(data, function(key, value){
+                        $('#regencies_id').append('<option value="'+ value.id +'">'+ value.name +'</option>');
+                    });
+                }
+            });
+        });
+    });
 </script>
 
 @endpush

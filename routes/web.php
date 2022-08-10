@@ -53,13 +53,14 @@ Route::prefix('user')
         Route::get('/', [DashboardUserController::class, 'index'])->name('user.index');
         Route::get('/transactions', [DashboardUserController::class, 'transactions'])->name('transactions.user.index');
         Route::get('/setting', [DashboardUserController::class, 'setting'])->name('setting.user.index');
+        Route::put('/setting', [DashboardUserController::class, 'updateUser'])->name('user.setting.update');
 
         // Ad To Cart
-        Route::post('/cart/{id}', [CartController::class,'addCart'])->name('addToCart');
+        Route::post('/cart/{id}', [CartController::class, 'addCart'])->name('addToCart');
 
-        Route::get('/cart', [CartController::class,'index'])->name('cart.index');
-        Route::delete('/cart/{id}', [CartController::class,'destroy'])->name('delete-cart');
-        Route::get('/province', [CartController::class,'Provinces'])->name('api-provinces');
-        Route::get('/regencies/{id}', [CartController::class,'Regencies'])->name('api-regencies');
+        Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+        Route::delete('/cart/{id}', [CartController::class, 'destroy'])->name('delete-cart');
+        Route::get('/province', [CartController::class, 'Provinces'])->name('api-provinces');
+        Route::get('/regencies/{id}', [CartController::class, 'Regencies'])->name('api-regencies');
     });
 Auth::routes();
