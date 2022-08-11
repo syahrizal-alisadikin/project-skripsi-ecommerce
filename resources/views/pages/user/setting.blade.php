@@ -103,7 +103,7 @@
                                    
                                     <div class="form-group mb-2">
                                         <label>Kota</label>
-                                        <select name="regencies_id" class="form-control" id="regencies_id">
+                                        <select name="regencies_id" class="form-control" id="regencies_id" required>
                                             <option value="">Pilih Kota</option>
                                         </select>
             
@@ -154,6 +154,26 @@
 
 <script>
     $(document).ready(function(){
+
+        var province_id = '{{ old('province_id',Auth::user()->province_id) }}';
+        var regencies_id = '{{ old('regencies_id',Auth::user()->regencies_id) }}';
+       
+        if(province_id){
+            $.ajax({
+                url : "{{ url('/') }}/user/regencies/"+province_id,
+                type : "GET",
+                dataType : "JSON",
+                success : function(data){
+                    $('#regencies_id').empty();
+                    $('#regencies_id').append('<option value="">Pilih Kota</option>');
+
+                    $.each(data, function(key, value){
+                        $('#regencies_id').append(`<option value="${value.id}" ${value.id == regencies_id ? "selected" : ""} >${value.name}</option>`);
+                    });
+                }
+            });
+        }
+
         $('#select').change(function(){
             var province_id = $(this).val();
             $.ajax({
@@ -162,6 +182,8 @@
                 dataType : "JSON",
                 success : function(data){
                     $('#regencies_id').empty();
+                    $('#regencies_id').append('<option value="">Pilih Kota</option>');
+
                     $.each(data, function(key, value){
                         $('#regencies_id').append('<option value="'+ value.id +'">'+ value.name +'</option>');
                     });

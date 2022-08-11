@@ -51,6 +51,16 @@ class DashboardUserController extends Controller
         if (isset($request->password)) {
             $this->validate($request, [
                 'password' => 'required|string|min:6|confirmed',
+
+            ]);
+            $user->update([
+                'name'      => $request->input('name'),
+                'email'     => $request->input('email'),
+                'phone'     => $request->input('phone'),
+                'password' => bcrypt($request->input('password')),
+                'address'   => $request->input('address'),
+                'province_id' => $request->input('province_id'),
+                'regencies_id' => $request->input('regencies_id'),
             ]);
         } else {
             $user->update([
@@ -63,8 +73,7 @@ class DashboardUserController extends Controller
             ]);
         }
 
-        return "lolos validasi";
-        $user->update($request->all());
-        return redirect()->route('user.setting.index')->with('success', 'Data berhasil diupdate');
+
+        return redirect()->route('setting.user.index')->with('success', 'Data berhasil diupdate');
     }
 }
