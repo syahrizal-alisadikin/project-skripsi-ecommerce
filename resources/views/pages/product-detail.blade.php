@@ -30,7 +30,7 @@
               <img
                 :key="photos[activePhoto].id"
                 :src="photos[activePhoto].url"
-                class="w-100 main-image"
+                class=" main-image"
                 style="width: 550px; max-height: 400px;"
                 alt=""
               />
