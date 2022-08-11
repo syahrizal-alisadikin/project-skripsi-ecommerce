@@ -30,8 +30,8 @@
               <img
                 :key="photos[activePhoto].id"
                 :src="photos[activePhoto].url"
-                class=" main-image"
-                style="width: 400px; height: 200px;"
+                class="w-100 main-image"
+                {{-- style="width: 400px; height: 200px;" --}}
                 alt=""
               />
             </transition>
@@ -46,8 +46,8 @@
                 <a href="#" @click="changeActive(index)">
                   <img
                     :src="photo.url"
-                    class=" thumbnail-image"
-                    style="height: 120px; width: 120px;"
+                    class="w-100 thumbnail-image"
+                    {{-- style="height: 120px; width: 120px;" --}}
                     :class="{ active: index == activePhoto }"
                     alt=""
                   />
