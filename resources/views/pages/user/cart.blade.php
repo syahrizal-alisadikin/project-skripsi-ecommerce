@@ -90,7 +90,7 @@
             <hr />
           </div>
           <div class="col-12">
-            <h2 class="mb-4">Shipping Details</h2>
+            <h2 class="mb-4">Informasi Pengiriman</h2>
           </div>
         </div>
       <form action="" method="POST" id="locations" enctype="multipart/form-data">
@@ -98,35 +98,17 @@
           <div class="row mb-2" data-aos="fade-up" data-aos-delay="200">
             <input type="hidden" id="totalPrice" name="total_price" value="{{$totalprice}}">
             <input type="hidden" id="totalPay" name="total_pay" value="{{$totalprice}}">
-            <div class="col-md-4">
+            <div class="col-md-6">
               <div class="form-group">
-                <label for="address_one">Address 1</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="address_one"
-                  aria-describedby="emailHelp"
-                  name="address_one"
-                  value="Setra Duta Cemara"
-                />
+                <label for="address_one">Alamat</label>
+                <textarea name="address" id="address" class="form-control" cols="30" placeholder="Masukan Alamat pengiriman" rows="5">
+                  {{old('address')}}
+                </textarea>
               </div>
-            </div>
-            <div class="col-md-4">
-              <div class="form-group">
-                <label for="address_two">Address 2</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="address_two"
-                  aria-describedby="emailHelp"
-                  name="address_two"
-                  value="Blok B2 No. 34"
-                />
-              </div>
-            </div>
+            </div>        
           <div class="col-md-4" >
               <div class="form-group" >
-                <label for="phone_number">Mobile</label>
+                <label for="phone_number">Phone Number</label>
                 <input
                   type="text"
                   class="form-control"
@@ -140,12 +122,13 @@
           <div class="row">
             <div class="col-md-4" >
               <div class="form-group" >
-                <label for="country">Country</label>
+                <label for="country">Negara</label>
                 <input
                   type="text"
                   class="form-control"
                   id="country"
                   name="country"
+                  readonly
                   value="Indonesia"
                 />
               </div>

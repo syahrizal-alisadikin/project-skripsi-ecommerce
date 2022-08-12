@@ -17,7 +17,7 @@
        data-aos="fade-up"
        data-aos-delay="100"
      >
-       <a class="component-categories d-block" href="#">
+       <a class="component-categories d-block" href="{{ route('category',$item->slug) }}">
          <div class="categories-image">
            <img
              src="{{ Storage::url($item->photo) }}"
