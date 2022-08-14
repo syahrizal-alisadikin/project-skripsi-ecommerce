@@ -115,20 +115,20 @@ class CheckoutController extends Controller
         if ($status == 'capture') {
             if ($type == 'credit_card') {
                 if ($fraud == 'challenge') {
-                    $transaction->transaction_status = 'pending';
+                    $transaction->status = 'pending';
                 } else {
-                    $transaction->transaction_status = 'success';
+                    $transaction->status = 'success';
                 }
             }
         } else if ($status == 'settlement') {
 
-            $transaction->transaction_status = 'success';
+            $transaction->status = 'success';
         } else if ($status == 'pending') {
-            $transaction->transaction_status = 'pending';
+            $transaction->status = 'pending';
         } else if ($status == 'deny') {
-            $transaction->transaction_status = 'failed';
+            $transaction->status = 'failed';
         } else if ($status == 'expire') {
-            $transaction->transaction_status = 'failed';
+            $transaction->status = 'failed';
         } else if ($status == 'cancel') {
             $transaction->transaction_status = 'failed';
         }
