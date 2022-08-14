@@ -13,7 +13,7 @@
         <a
             href="{{ route('transactions.user.index') }}"
           style="cursor: pointer"
-          class="list-group-item text-decoration-none  text-uppercase {{ setActive('user/transactions') }}"
+          class="list-group-item text-decoration-none  text-uppercase {{ setActive('user/transactions' . '*') }}"
           ><i class="fas fa-dollar-sign"></i> Transaction</a
         >
       </li>

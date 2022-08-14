@@ -22,9 +22,33 @@ class DashboardUserController extends Controller
             $query = Transaction::where('user_id', Auth::user()->id);
             return DataTables::of($query)
                 ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $btn = '<a href="' . route('transaction', $row->id) . '" class="btn btn-primary btn-sm">Detail</a>';
+                    return $btn;
+                })
+                ->editColumn('status', function ($row) {
+                    if ($row->status == 'pending') {
+                        $status = '<span class="badge bg-warning">Pending</span>';
+                    } elseif ($row->status == 'success') {
+                        $status = '<span class="badge bg-success">Success</span>';
+                    } elseif ($row->status == 'failed') {
+                        $status = '<span class="badge bg-danger">Failed</span>';
+                    }
+                    return $status;
+                })
+                ->editColumn('total_price', function ($row) {
+                    return moneyFormat($row->total_price);
+                })
+                ->rawColumns(['action', 'status', 'total_price'])
                 ->make(true);
         }
         return view('pages.user.transactions');
+    }
+
+    public function transaction($id)
+    {
+        $transaction = Transaction::find($id);
+        return view('pages.user.transaction-detail', compact('transaction'));
     }
 
     public function setting()

@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\User\CartController;
+use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\DashboardUserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -56,15 +57,21 @@ Route::prefix('user')
     ->group(function () {
         Route::get('/', [DashboardUserController::class, 'index'])->name('user.index');
         Route::get('/transactions', [DashboardUserController::class, 'transactions'])->name('transactions.user.index');
+        Route::get('/transactions/{id}', [DashboardUserController::class, 'transaction'])->name('transaction');
         Route::get('/setting', [DashboardUserController::class, 'setting'])->name('setting.user.index');
         Route::put('/setting', [DashboardUserController::class, 'updateUser'])->name('user.setting.update');
 
-        // Ad To Cart
+        // Add To Cart
         Route::post('/cart/{id}', [CartController::class, 'addCart'])->name('addToCart');
+
+        // checkout
+        Route::post('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
+
 
         Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
         Route::delete('/cart/{id}', [CartController::class, 'destroy'])->name('delete-cart');
-        Route::get('/province', [CartController::class, 'Provinces'])->name('api-provinces');
-        Route::get('/regencies/{id}', [CartController::class, 'Regencies'])->name('api-regencies');
+        Route::get('/province', [CartController::class, 'provinces'])->name('api-provinces');
+        Route::get('/regencies/{id}', [CartController::class, 'regencies'])->name('api-regencies');
+        Route::get('/district/{id}', [CartController::class, 'distric'])->name('api-district');
     });
 Auth::routes();

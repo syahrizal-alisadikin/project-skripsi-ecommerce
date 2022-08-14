@@ -1,0 +1,99 @@
+<?php
+
+namespace App\Http\Controllers\User;
+
+use App\Http\Controllers\Controller;
+use App\Models\Cart;
+use App\Models\Transaction;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Exception;
+use Illuminate\Support\Facades\DB;
+use Midtrans\Snap;
+
+class CheckoutController extends Controller
+{
+    public function __construct(Request $request)
+    {
+        $this->middleware('auth');
+        // Set Midtrans Cofiguration
+        \Midtrans\Config::$serverKey = config('services.midtrans.serverKey');
+        \Midtrans\Config::$isProduction = config('services.midtrans.isProduction');
+        \Midtrans\Config::$isSanitized = config('services.midtrans.isSanitized');
+        \Midtrans\Config::$is3ds = config('services.midtrans.is3ds');
+    }
+
+    public function checkout(Request $request)
+    {
+        $user = Auth::user();
+        $code = 'TRX-' . mt_rand(00000, 99999);
+
+        $carts = Cart::with(['product', 'user'])
+            ->where('user_id', $user->id)
+            ->get();
+
+        DB::beginTransaction();
+        try {
+            // Create Transaction
+            $transaction = Transaction::create([
+                'code'          => $code,
+                'user_id'       => $user->id,
+                'total_price'   => $request->total_price,
+                'status'        => 'pending',
+                'phone'         => $request->phone_number,
+                'kode_pos'      => $request->kode_pos,
+                'address'       => $request->address,
+                'province_id'   => $request->provinces_id,
+                'regencies_id'  => $request->regencies_id,
+                'district_id'   => $request->district_id,
+            ]);
+
+            foreach ($carts as $cart) {
+
+                // Create Transaction Detail
+                $transaction->transaction_details()->create([
+                    'product_id' => $cart->product_id,
+                    'price'      => $cart->product->price,
+                    'quantity'   => $cart->quantity,
+                ]);
+                // decrement product stock
+                $cart->product->decrement('quantity', $cart->quantity);
+                // Delete Cart
+                $cart->delete();
+            }
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollback();
+            return redirect()->route('cart.index')->with('error', 'Data gagal ditambahkan ke cart !!')->withInput();
+        }
+
+        // Buat Aray untuk dikirim ke midtrans
+        $midtrans = [
+            "transaction_details" => [
+                "order_id" => $code,
+                "gross_amount" => (int) $request->total_price,
+            ],
+            "customer_details" => [
+                "first_name" => Auth::user()->name,
+                "email" => Auth::user()->email,
+            ],
+            "enabled_payments" => [
+                "gopay", "indomaret", "bca_klikbca", "bank_transfer"
+            ],
+            "vtweb" => []
+        ];
+
+        // dd($paymentUrl);
+        try {
+            $paymentUrl = Snap::createTransaction($midtrans)->redirect_url;
+            // Get Snap Payment Page URL
+            $transaction->update([
+                'midtrans' => $paymentUrl,
+            ]);
+            // Redirect to Snap Payment Page
+            return redirect($paymentUrl);
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+}

@@ -75,7 +75,7 @@
                                         </span>
                                         @enderror
                                     </div>
-                                    <div class="form-group">
+                                    {{-- <div class="form-group">
                                         <label for="address">Address</label>
                                         <textarea name="address" id="address" class="form-control @error('address') is-invalid @enderror" cols="30" rows="5" placeholder="masukan address">{{ old('address') }}</textarea>
                                         @error('address')
@@ -83,7 +83,7 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                         @enderror
-                                    </div>
+                                    </div> --}}
                                     <div class="form-group">
                                         <div class="d-block">
                                             <label for="password"

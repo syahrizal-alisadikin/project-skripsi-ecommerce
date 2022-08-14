@@ -11,4 +11,24 @@ class Transaction extends Model
     use HasFactory, SoftDeletes;
 
     protected $guarded = ["id"];
+
+    public function transaction_details()
+    {
+        return $this->hasMany(TransactionDetail::class);
+    }
+
+    public function province()
+    {
+        return $this->belongsTo(Province::class, 'province_id');
+    }
+
+    public function regency()
+    {
+        return $this->belongsTo(Regency::class, 'regencies_id');
+    }
+
+    public function district()
+    {
+        return $this->belongsTo(District::class, 'district_id');
+    }
 }

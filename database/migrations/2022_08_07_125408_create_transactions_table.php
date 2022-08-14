@@ -17,7 +17,7 @@ class CreateTransactionsTable extends Migration
             $table->id();
             $table->integer('user_id');
             $table->integer('total_price');
-            $table->enum('status',['pending','success','failed']); //unpaid/pending/shipping/success/failed
+            $table->enum('status', ['pending', 'success', 'failed']); //unpaid/pending/shipping/success/failed
             $table->string('resi');
 
             $table->softDeletes();

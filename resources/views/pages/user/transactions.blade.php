@@ -19,8 +19,9 @@
                             <thead>
                             <tr>
                                 <th scope="col" style="text-align: center;width: 6%">NO.</th>
-                                <th scope="col">NAME</th>
-                                
+                                <th scope="col">Kode Transaksi</th>
+                                <th scope="col">Nominal</th>
+                                <th scope="col">Status</th>
                                 <th scope="col" style="width: 15%;text-align: center">AKSI</th>
                             </tr>
                             </thead>
@@ -55,8 +56,16 @@
                 }
                 },
                 {
-                    data: 'name',
-                    name: 'name'
+                    data: 'code',
+                    name: 'code'
+                },
+                {
+                    data: 'total_price',
+                    name: 'total_price'
+                },
+                {
+                    data: 'status',
+                    name: 'status'
                 },
                 
                 {
@@ -76,6 +85,14 @@
                 },
                 {
                     "targets": 2, // your case first column
+                    "className": "text-center",
+                },
+                {
+                    "targets": 3, // your case first column
+                    "className": "text-center",
+                },
+                {
+                    "targets": 4, // your case first column
                     "className": "text-center",
                 },
                

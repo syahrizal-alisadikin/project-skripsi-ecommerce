@@ -93,7 +93,7 @@
             <h2 class="mb-4">Informasi Pengiriman</h2>
           </div>
         </div>
-      <form action="" method="POST" id="locations" enctype="multipart/form-data">
+      <form action="{{ route('checkout') }}" method="POST" id="locations" enctype="multipart/form-data">
         @csrf
           <div class="row mb-2" data-aos="fade-up" data-aos-delay="200">
             <input type="hidden" id="totalPrice" name="total_price" value="{{$totalprice}}">
@@ -101,8 +101,7 @@
             <div class="col-md-4">
               <div class="form-group">
                 <label for="address_one">Alamat</label>
-                <textarea name="address" id="address" class="form-control" cols="30" placeholder="Masukan Alamat pengiriman" rows="2">
-                  {{old('address')}}
+                <textarea name="address" id="address" class="form-control"  required cols="30" placeholder="Masukan Alamat pengiriman" rows="2">{{old('address')}}
                 </textarea>
               </div>
             </div>        
@@ -114,6 +113,8 @@
                   class="form-control"
                   id="phone_number"
                   name="phone_number"
+                  value="{{ old('phone_number') }}"
+                  required
                 />
               </div>
             </div>
@@ -123,8 +124,10 @@
                 <input
                   type="text"
                   class="form-control"
-                  id="phone_number"
-                  name="phone_number"
+                  id="kode_pos"
+                  name="kode_pos"
+                  value="{{ old('kode_pos') }}"
+                  required
                 />
               </div>
             </div>
@@ -134,7 +137,7 @@
             <div class="col-md-4">
               <div class="form-group">
                 <label for="province">Province</label>
-                <select name="fk_provinces_id"  id="select" v-if="provinces" v-model="provinces_id" class="form-control">
+                <select name="provinces_id"  id="select" v-if="provinces" v-model="provinces_id" class="form-control">
                 <option v-for="province in provinces" :value="province.id">@{{ province.name }}</option>
                 </select>
                 <select v-else class="form-control"></select>
@@ -143,7 +146,7 @@
             <div class="col-md-4">
               <div class="form-group">
                 <label for="fk_regencies_id">City</label>
-               <select name="city_id" @change="GetCourier()"  id="select" v-if="regencies" v-model="city_id" class="form-control">
+               <select name="regencies_id" @change="getKab()"  v-if="regencies" v-model="regencies_id" required class="form-control">
                 <option v-for="regencie in regencies" :value="regencie.id">@{{ regencie.name }}</option>
                 </select>
                 <select v-else class="form-control"></select>
@@ -152,10 +155,10 @@
             <div class="col-md-4" >
               <div class="form-group">
                 <label for="fk_regencies_id">Kabupaten</label>
-               <select name="city_id" @change="GetCourier()"  id="select" v-if="regencies" v-model="city_id" class="form-control">
-                <option v-for="regencie in regencies" :value="regencie.id">@{{ regencie.name }}</option>
+               <select name="district_id"    v-if="districts" v-model="district_id" required class="form-control">
+                <option v-for="district in districts" :value="district.id">@{{ district.name }}</option>
                 </select>
-                <select v-else class="form-control"></select>
+                <select v-else class="form-control">Tidak ada data</select>
               </div>
             </div>
           </div>
@@ -171,26 +174,15 @@
             </div>
           </div>
           <div class="row" data-aos="fade-up" data-aos-delay="200" >
+          
             <div class="col-4 col-md-2">
-              <div class="product-title">$0</div>
-              <div class="product-subtitle">Country Tax</div>
-            </div>
-            <div class="col-4 col-md-3">
-              <div class="product-title">$0</div>
-              <div class="product-subtitle">Product Insurance</div>
-            </div>
-            <div class="col-4 col-md-2">
-              <div class="product-title" id="courier_cost">$0</div>
-              <div class="product-subtitle">Ship to <p id="tujuan"></p></div>
-            </div>
-            <div class="col-4 col-md-2">
-              <div class="product-title text-success" id="totalPembayaran">{{ moneyFormat($totalprice ?? 0) }}</div>
+              <div class="product-title text-black" id="totalPembayaran">{{ moneyFormat($totalprice ?? 0) }}</div>
               <div class="product-subtitle">Total</div>
             </div>
-            <div class="col-8 col-md-3" v-if="checkout">
+            <div class="col-8 col-md-3">
               <button
               type="submit"
-              class="btn btn-success mt-4 px-4 btn-block"
+              class="btn btn-primary mt-4 px-4 btn-block"
               >
                 Checkout Now
               </button>
@@ -225,8 +217,10 @@
          
           provinces:null,
           regencies:null,
+          districts:null,
           provinces_id:null,
-          city_id:null,
+          regencies_id:null,
+          district_id:null,
           checkout:null,
           }
         },
@@ -249,13 +243,28 @@
                     self.regencies = response.data;
                      
               });
-            }
+            },
+            getKab(){
+              var self = this;
+              axios.get('{{ url('user/district') }}/' + self.regencies_id)
+                  .then(function(response){
+                    console.log(response.data)
+                  self.districts = response.data;
+                   
+                });
+              }
+            
         },
         watch: {
           provinces_id: function(val, oldVal){
             this.regencies_id=null;
             this.getRegenciesData();
-          }
+          },
+          regencies_id: function(val, oldVal){
+            this.district_id=null;
+            this.getKab();
+          },
+          
         },
       });
     </script>
