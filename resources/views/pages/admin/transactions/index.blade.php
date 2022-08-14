@@ -22,7 +22,11 @@
                             <thead>
                             <tr>
                                 <th scope="col" style="text-align: center;width: 6%">NO.</th>
+                                <th scope="col">KODE</th>
                                 <th scope="col">NAME</th>
+                                <th scope="col">NOMINAL</th>
+                                <th scope="col">STATUS</th>
+                              
                                 
                                 <th scope="col" style="width: 15%;text-align: center">AKSI</th>
                             </tr>
@@ -59,14 +63,27 @@
                 }
                 },
                 {
-                    data: 'name',
-                    name: 'name'
+                    data: 'code',
+                    name: 'code'
                 },
                 
+                {
+                    data: 'user.name',
+                    name: 'user.name'
+                },
+                {
+                    data: 'total_price',
+                    name: 'total_price'
+                },
+                {
+                    data: 'status',
+                    name: 'status'
+                },
                 {
                     data: 'action',
                     name: 'action'
                 },
+
                
             ],
             columnDefs: [
@@ -80,6 +97,18 @@
                 },
                 {
                     "targets": 2, // your case first column
+                    "className": "text-center",
+                },
+                {
+                    "targets": 3, // your case first column
+                    "className": "text-center",
+                },
+                {
+                    "targets": 4, // your case first column
+                    "className": "text-center",
+                },
+                {
+                    "targets": 5, // your case first column
                     "className": "text-center",
                 },
                
@@ -107,7 +136,7 @@
                 if (isConfirm) {
                     //ajax delete
                     jQuery.ajax({
-                        url: "/dashboard/admin/"+id,
+                        url: "/admin/transactions/"+id,
                         data:   {
                             "id": id,
                             "_token": token

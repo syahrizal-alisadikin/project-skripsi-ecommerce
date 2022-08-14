@@ -16,25 +16,37 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        if(request()->ajax())
-        {
-            $query = Transaction::query();
+        if (request()->ajax()) {
+            $query = Transaction::query()->with('user');
             return DataTables::of($query)
-            ->addIndexColumn()
-            ->addColumn('action', function ($data) {
+                ->addIndexColumn()
+                ->addColumn('action', function ($data) {
 
-                $edit = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">Edit</a>';
-                $delete = '<a href="javascript:void(0)" onClick="Delete(this.id)" id="' . $data->email . '" class="delete btn btn-danger btn-sm">Delete </a>';
+                    $edit = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">Show</a>';
+                    $delete = "";
+                    if ($data->status == 'failed') {
+                        $delete = '<a href="javascript:void(0)" onClick="Delete(this.id)" id="' . $data->id . '" class="delete btn btn-danger btn-sm">Delete </a>';
+                    }
 
-                return $edit . ' ' . $delete;
-            })
-            
-            ->rawColumns(['action'])
-            ->make(true); 
+                    return $edit . ' ' . $delete;
+                })
+                ->editColumn('status', function ($data) {
+                    if ($data->status == "pending") {
+                        return '<span class="badge badge-warning">Pending</span>';
+                    } else if ($data->status == "success") {
+                        return '<span class="badge badge-success">Success</span>';
+                    } else if ($data->status == "failed") {
+                        return '<span class="badge badge-danger">Failed</span>';
+                    }
+                })
+                ->editColumn('total_price', function ($data) {
+                    return moneyFormat($data->total_price);
+                })
+                ->rawColumns(['action', 'status'])
+                ->make(true);
         }
 
         return view('pages.admin.transactions.index');
-
     }
 
     /**
@@ -66,7 +78,8 @@ class TransactionController extends Controller
      */
     public function show($id)
     {
-        //
+        $transaction = Transaction::with('transaction_details')->find($id);
+        return "otw ya";
     }
 
     /**
@@ -100,6 +113,9 @@ class TransactionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //delete transaction
+        $transaction = Transaction::find($id);
+        $transaction->delete();
+        return response()->json(['status' => 'success']);
     }
 }

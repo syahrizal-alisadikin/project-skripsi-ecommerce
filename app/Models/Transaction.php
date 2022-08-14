@@ -17,6 +17,11 @@ class Transaction extends Model
         return $this->hasMany(TransactionDetail::class);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
     public function province()
     {
         return $this->belongsTo(Province::class, 'province_id');
