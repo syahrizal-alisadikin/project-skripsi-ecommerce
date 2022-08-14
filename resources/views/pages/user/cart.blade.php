@@ -98,10 +98,10 @@
           <div class="row mb-2" data-aos="fade-up" data-aos-delay="200">
             <input type="hidden" id="totalPrice" name="total_price" value="{{$totalprice}}">
             <input type="hidden" id="totalPay" name="total_pay" value="{{$totalprice}}">
-            <div class="col-md-6">
+            <div class="col-md-4">
               <div class="form-group">
                 <label for="address_one">Alamat</label>
-                <textarea name="address" id="address" class="form-control" cols="30" placeholder="Masukan Alamat pengiriman" rows="5">
+                <textarea name="address" id="address" class="form-control" cols="30" placeholder="Masukan Alamat pengiriman" rows="2">
                   {{old('address')}}
                 </textarea>
               </div>
@@ -117,22 +117,20 @@
                 />
               </div>
             </div>
-           
-          </div>
-          <div class="row">
             <div class="col-md-4" >
               <div class="form-group" >
-                <label for="country">Negara</label>
+                <label for="phone_number">Kode Pos</label>
                 <input
                   type="text"
                   class="form-control"
-                  id="country"
-                  name="country"
-                  readonly
-                  value="Indonesia"
+                  id="phone_number"
+                  name="phone_number"
                 />
               </div>
             </div>
+          </div>
+          <div class="row">
+            
             <div class="col-md-4">
               <div class="form-group">
                 <label for="province">Province</label>
@@ -145,6 +143,15 @@
             <div class="col-md-4">
               <div class="form-group">
                 <label for="fk_regencies_id">City</label>
+               <select name="city_id" @change="GetCourier()"  id="select" v-if="regencies" v-model="city_id" class="form-control">
+                <option v-for="regencie in regencies" :value="regencie.id">@{{ regencie.name }}</option>
+                </select>
+                <select v-else class="form-control"></select>
+              </div>
+            </div>
+            <div class="col-md-4" >
+              <div class="form-group">
+                <label for="fk_regencies_id">Kabupaten</label>
                <select name="city_id" @change="GetCourier()"  id="select" v-if="regencies" v-model="city_id" class="form-control">
                 <option v-for="regencie in regencies" :value="regencie.id">@{{ regencie.name }}</option>
                 </select>

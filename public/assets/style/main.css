@@ -22,8 +22,12 @@ footer p {
 .navbar-store {
   padding-top: 15px;
 }
+.navbar-store a.nav-link.text-white {
+  background-color: #2491E0;
+
+}
 .navbar-store ul li.active a {
-  color: #198754 !important;
+  color: #2491E0 !important;
   font-weight: bold;
 }
 @media (min-width: 992px) {
@@ -42,7 +46,7 @@ footer p {
   border-radius: 50%;
   font-size: 10px;
   text-align: center;
-  background: #29a867;
+  background: #2491E0;
   color: #fefefe;
   margin-left: -10px;
 }

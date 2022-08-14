@@ -29,18 +29,22 @@ Route::get('/categories', [HomeController::class, 'categories'])->name('categori
 Route::get('/categories/{slug}', [HomeController::class, 'category'])->name('category');
 Route::get('/product/{slug}', [HomeController::class, 'productDetail'])->name('product');
 
+Route::get('midtrans/success', [HomeController::class, 'success'])->name('midtrans.success');
+Route::get('midtrans/unfinish', [HomeController::class, 'unfinish'])->name('midtrans.unfinish');
+Route::get('midtrans/error', [HomeController::class, 'error'])->name('midtrans.error');
+
 Route::prefix('admin')
     ->middleware('isAdmin')
     ->name('admin.')
     ->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
-        route::resource('admin', AdminController::class);
-        route::resource('category', CategoryController::class);
-        route::resource('users', UserController::class);
-        route::resource('products', ProductController::class);
+        Route::resource('admin', AdminController::class);
+        Route::resource('category', CategoryController::class);
+        Route::resource('users', UserController::class);
+        Route::resource('products', ProductController::class);
         Route::post('/upload-gallery', [ProductController::class, 'productGalleryUpload'])->name('upload.gallery');
         Route::get('/product-gallery-delete/{id}', [ProductController::class, 'productGalleryDelete'])->name('product.gallery.delete');
-        route::resource('transactions', TransactionController::class);
+        Route::resource('transactions', TransactionController::class);
 
         // setting akun
         Route::get('/setting', [AdminController::class, 'setting'])->name('setting.index');

@@ -21,7 +21,7 @@
                                 <div class="contact-form-wrap">
                                     <div class="contact-form-box">
                                         <h4>Alamat</h4>
-                                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Inventore illo odit ratione mollitia ducimus repellendus repellat molestias dolores omnis iste earum dolorem doloremque incidunt esse aliquam excepturi, minus ullam quos.</p>
+                                        <p>Jl. Cileungsi - setu, Kp. Rawahingkik, RT. 001 / RW. 001, No. 34, Desa limusnunggal, Cileungsi, 16820, Bogor, Jawa barat</p>
                                     </div>
                                     <div class="contact-form-box">
                                         <h4>Jam Operasional</h4>
@@ -29,9 +29,28 @@
                                     </div>
                                     <div class="contact-form-box">
                                         <h4>Kontak</h4>
-                                        Whatsapp : lorem <br> 
-                                        Instagram : lorem<br>
-                                        Facebook : Lorem</p>
+                                        <table>
+                                            <tr>
+                                                <td>Whatsapp </td>
+                                                <td>:</td>
+                                                <td><a href="https://wa.me/6281911587270" class="btn text-black"> 0819-1158-7270</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Email</td>
+                                                <td>:</td>
+                                                <td>
+                                                    <a href="mailto:kaynadaherbal@gmail.com"class="btn text-black">kaynadaherbal@gmail.com</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>IG</td>
+                                                <td>:</td>
+                                                <td>
+                                                    <a href="https://www.instagram.com/kaynadaonline/"class="btn text-black">kaynadaonline </a>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        
                                     </div>
                                     <div class="contact-form-box">
                                         <h4>Informasi Produk</h4>
@@ -47,13 +66,7 @@
     </section>
     <br><br><br>
 
-    <section>
-    <div class="col-12" data-aos="fade-up">
-    <div class="embed-responsive embed-responsive-21by9 mt-3 ">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63808.94359359887!2d103.24633797910157!3d-1.7015810000000007!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e2f71182207cc3f%3A0x58b4dbe062d7a0f4!2sIRVIANDA%20BAKERY!5e0!3m2!1sen!2sid!4v1649497294055!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    </div>
-    </div>
-    </section>
+  
 </div>
 
 @endsection

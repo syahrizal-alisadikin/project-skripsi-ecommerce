@@ -55,4 +55,22 @@ class HomeController extends Controller
         $product = Product::where('slug', $slug)->with('galleries')->first();
         return view('pages.product-detail', compact('product'));
     }
+
+    // Midtrans Success
+    public function success()
+    {
+        return view('pages.success');
+    }
+
+    // Midtrans Unfinish
+    public function unfinish()
+    {
+        return view('pages.unfinish');
+    }
+
+    // Midtrans Error
+    public function error()
+    {
+        return view('pages.error');
+    }
 }

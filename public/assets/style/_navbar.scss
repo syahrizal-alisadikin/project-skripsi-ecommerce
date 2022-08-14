@@ -1,11 +1,13 @@
 .navbar-store {
     padding-top: 15px;
-
+    a.btn-nav-link.text-white{
+        background-color: #2491E0;
+    }
     //   background-color: #fff !important;
     ul {
         li.active{
             a{
-                color: #198754 !important;
+                color: #2491E0 !important;
                 font-weight: bold;
             }
             // border-bottom: 3px solid #198754 !important;
@@ -33,7 +35,7 @@
         border-radius: 50%;
         font-size: 10px;
         text-align: center;
-        background: #29a867;
+        background: #2491E0;
         color: #fefefe;
         margin-left: -10px;
     }

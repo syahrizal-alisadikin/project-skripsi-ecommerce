@@ -37,7 +37,7 @@ data-aos="fade-down"
             </li>
             <li class="nav-item">
                 <a
-                class="btn btn-success nav-link px-4 text-white"
+                class="btn  nav-link px-4 text-white"
                 href="{{route('login')}}"
                 >Sign In</a
                 >
