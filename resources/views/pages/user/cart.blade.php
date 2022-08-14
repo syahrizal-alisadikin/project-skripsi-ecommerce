@@ -180,12 +180,14 @@
               <div class="product-subtitle">Total</div>
             </div>
             <div class="col-8 col-md-3">
+              @if(count($carts) > 0)
               <button
               type="submit"
               class="btn btn-primary mt-4 px-4 btn-block"
               >
                 Checkout Now
               </button>
+              @endif
             </div>
           </div>
         </div>
