@@ -10,12 +10,12 @@ use Illuminate\Support\Facades\Auth;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Midtrans\Snap;
+use Midtrans\Notification;
 
 class CheckoutController extends Controller
 {
     public function __construct(Request $request)
     {
-        $this->middleware('auth');
         // Set Midtrans Cofiguration
         \Midtrans\Config::$serverKey = config('services.midtrans.serverKey');
         \Midtrans\Config::$isProduction = config('services.midtrans.isProduction');
@@ -95,5 +95,45 @@ class CheckoutController extends Controller
         } catch (Exception $e) {
             echo $e->getMessage();
         }
+    }
+
+    public function midtransCallback()
+    {
+        //instance midtrans notif
+        $notification = new Notification();
+
+        //assign ke variable untuk memuahka ke coding
+        $status = $notification->transaction_status;
+        $type = $notification->payment_type;
+        $fraud = $notification->fraud_status;
+        $order_id = $notification->order_id;
+
+        // cari transaksi berdasarkan id
+        $transaction = Transaction::where('code', $order_id)->first();
+
+        // handle notif status
+        if ($status == 'capture') {
+            if ($type == 'credit_card') {
+                if ($fraud == 'challenge') {
+                    $transaction->transaction_status = 'pending';
+                } else {
+                    $transaction->transaction_status = 'success';
+                }
+            }
+        } else if ($status == 'settlement') {
+
+            $transaction->transaction_status = 'success';
+        } else if ($status == 'pending') {
+            $transaction->transaction_status = 'pending';
+        } else if ($status == 'deny') {
+            $transaction->transaction_status = 'failed';
+        } else if ($status == 'expire') {
+            $transaction->transaction_status = 'failed';
+        } else if ($status == 'cancel') {
+            $transaction->transaction_status = 'failed';
+        }
+
+        //simpan transaksi 
+        $transaction->save();
     }
 }
