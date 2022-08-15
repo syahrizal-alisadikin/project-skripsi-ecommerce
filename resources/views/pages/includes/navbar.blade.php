@@ -47,23 +47,21 @@ data-aos="fade-down"
     @auth
     <ul class="navbar-nav  d-none d-lg-flex">
            <li class="nav-item dropdown {{ setActive('user') }}">
-             <a
-               class="nav-link"
-               href="{{ route('user.index') }}"
-               id="navbarDropdown"
-               role="button"
-               data-toggle="dropdown"
-               aria-haspopup="true"
-               aria-expanded="false"
-             >
-               {{-- <img
-                 src="/images/icon-user.png"
-                 alt=""
-                 class="rounded-circle mr-2 profile-picture"
-               /> --}}
-               Hi, {{Auth::user()->name}}
-             </a>
-           
+            <a class="btn  dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fa fa-user"></i>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{{ route('setting.alamat') }}">Pengaturan alamat</a></li>
+              <li><a class="dropdown-item" href="{{ route('setting.user.index') }}">Pengaturan akun</a></li>
+              <li>
+                <a class="dropdown-item" onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();"
+style="cursor: pointer" href="javascript:void(0)">Logout</a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                  @csrf
+              </form>
+              </li>
+            </ul>
            </li>
            <li class="nav-item">
              <a class="nav-link d-inline-block" href="{{ route('cart.index') }}">
@@ -89,7 +87,7 @@ data-aos="fade-down"
              </a>
            </li>
            <li class="nav-item">
-             <a class="nav-link d-inline-block" href="#">
+             <a class="nav-link d-inline-block" href="{{ route('cart.index') }}">
                Cart
              </a>
            </li>

@@ -49,6 +49,7 @@ Route::prefix('admin')
 
         // setting akun
         Route::get('/setting', [AdminController::class, 'setting'])->name('setting.index');
+
         Route::put('/setting', [AdminController::class, 'settingUpdate'])->name('setting.update');
     });
 
@@ -60,6 +61,8 @@ Route::prefix('user')
         Route::get('/transactions/{id}', [DashboardUserController::class, 'transaction'])->name('transaction');
         Route::get('/setting', [DashboardUserController::class, 'setting'])->name('setting.user.index');
         Route::put('/setting', [DashboardUserController::class, 'updateUser'])->name('user.setting.update');
+        Route::put('/setting/alamat', [DashboardUserController::class, 'updateAlamatUser'])->name('user.setting.alamat');
+        Route::get('/setting/alamat', [DashboardUserController::class, 'settingAlamat'])->name('setting.alamat');
 
         // Add To Cart
         Route::post('/cart/{id}', [CartController::class, 'addCart'])->name('addToCart');

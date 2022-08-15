@@ -73,14 +73,14 @@
       {{-- <form action="{{ route('checkout') }}" method="POST" id="locations" enctype="multipart/form-data"> --}}
         @csrf
           <div class="row mb-2" data-aos="fade-up" data-aos-delay="200">
-          
             <div class="col-md-4">
               <div class="form-group">
-                <label for="address_one">Alamat</label>
-                <textarea name="address" id="address" class="form-control" required cols="30" placeholder="Masukan Alamat pengiriman" rows="2">{{ $transaction->address }}
+                <label for="address_one">Nama Lengkap</label>
+                <textarea name="address" id="address" class="form-control" required cols="30" placeholder="Masukan Alamat pengiriman" rows="2">{{ $transaction->name }}
                 </textarea>
               </div>
-            </div>        
+            </div> 
+                   
           <div class="col-md-4" >
               <div class="form-group" >
                 <label for="phone_number">Phone Number</label>
@@ -94,7 +94,43 @@
                 />
               </div>
             </div>
-            <div class="col-md-4" >
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="address_one">Alamat</label>
+                <textarea name="address" id="address" class="form-control" required cols="30" placeholder="Masukan Alamat pengiriman" rows="2">{{ $transaction->address }}
+                </textarea>
+              </div>
+            </div> 
+            
+          </div>
+          <div class="row">
+            
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="province">Province</label>
+                <select name="provinces_id"  class="form-control">
+                <option>{{ $transaction->province->name }}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="fk_regencies_id">City</label>
+               <select name="regencies_id"  class="form-control">
+                <option>{{ $transaction->regency->name }}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-3" >
+              <div class="form-group">
+                <label for="fk_regencies_id">Kabupaten</label>
+               <select name="district_id"     class="form-control">
+                <option >{{ $transaction->district->name }}</option>
+                </select>
+              
+              </div>
+            </div>
+            <div class="col-md-3" >
               <div class="form-group" >
                 <label for="phone_number">Kode Pos</label>
                 <input
@@ -105,34 +141,6 @@
                   value="{{  $transaction->kode_pos }}"
                   required
                 />
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            
-            <div class="col-md-4">
-              <div class="form-group">
-                <label for="province">Province</label>
-                <select name="provinces_id"  class="form-control">
-                <option>{{ $transaction->province->name }}</option>
-                </select>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="form-group">
-                <label for="fk_regencies_id">City</label>
-               <select name="regencies_id"  class="form-control">
-                <option>{{ $transaction->regency->name }}</option>
-                </select>
-              </div>
-            </div>
-            <div class="col-md-4" >
-              <div class="form-group">
-                <label for="fk_regencies_id">Kabupaten</label>
-               <select name="district_id"     class="form-control">
-                <option >{{ $transaction->district->name }}</option>
-                </select>
-              
               </div>
             </div>
           </div>

@@ -22,7 +22,7 @@
         href="{{ route('setting.user.index') }}"
 
           style="cursor: pointer"
-          class="list-group-item text-decoration-none {{ setActive('user/setting') }} text-uppercase"
+          class="list-group-item text-decoration-none {{ setActive('user/setting' . '*') }} text-uppercase"
           ><i class="fas fa-user-alt"></i> Setting</a
         >
       </li>

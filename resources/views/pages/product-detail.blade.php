@@ -99,7 +99,7 @@
                                     </div>
                                     <button
                                     type="submit "
-                                    class="btn btn-success  px-4 mt-2 text-white btn-block mb-3 " {{ $product->quantity <= 0 ? 'disabled' : '' }}
+                                    class="btn btn-primary  px-4 mt-2 text-white btn-block mb-3 " {{ $product->quantity <= 0 ? 'disabled' : '' }}
                                     {{ $product->quantity == 0 ? 'disabled' : '' }}
                                     >Add To Cart
                                     </button>
@@ -107,7 +107,7 @@
                                   @else
                                     <a
                                     href="{{route('login')}}"
-                                    class="btn btn-success px-4 text-white btn-block mb-3"
+                                    class="btn btn-primary px-4 text-white btn-block mb-3"
                                     >Sign in
                                     </a>
                                   @endauth

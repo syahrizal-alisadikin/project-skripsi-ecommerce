@@ -106,7 +106,7 @@
                  <img src="{{ Storage::url($item->galleries->first()->photos) }}" class="w-100" style="height: 15em; object-fit: cover; border-top-left-radius: 0.25rem; border-top-right-radius: 0.25rem;">
                </div>
                <div class="card-body">
-                 <a href="/product/macbook-pro-16-m1-max" class="card-title font-weight-bold" style="font-size: 20px;">{{ $item->name }}</a>
+                 <a href="{{ route('product',$item->slug) }}" class="card-title font-weight-bold" style="font-size: 20px;">{{ $item->name }}</a>
                 
                  <div class="price font-weight-bold mt-2" > {{ moneyFormat($item->price) }}</div>
                  <a href="{{ route('product',$item->slug) }}" class="btn btn-primary btn-md mt-3 btn-block shadow-md">LIHAT PRODUK</a>

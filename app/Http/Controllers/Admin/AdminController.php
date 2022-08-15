@@ -140,6 +140,8 @@ class AdminController extends Controller
         return view('pages.admin.admin.setting');
     }
 
+
+
     public function settingUpdate(Request $request)
     {
         $request->validate([

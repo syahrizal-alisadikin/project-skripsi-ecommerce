@@ -100,14 +100,14 @@
             <input type="hidden" id="totalPay" name="total_pay" value="{{$totalprice}}">
             <div class="col-md-4">
               <div class="form-group">
-                <label for="address_one">Alamat</label>
-                <textarea name="address" id="address" class="form-control"  required cols="30" placeholder="Masukan Alamat pengiriman" rows="2">{{old('address')}}
+                <label for="address_one">Nama Lengkap</label>
+                <textarea name="name" id="name" class="form-control" required  required cols="30" placeholder="Masukan Nama Lengkap" rows="2">{{old('name')}}
                 </textarea>
               </div>
             </div>        
           <div class="col-md-4" >
               <div class="form-group" >
-                <label for="phone_number">Phone Number</label>
+                <label for="phone_number">No telphone</label>
                 <input
                   type="text"
                   class="form-control"
@@ -119,46 +119,46 @@
               </div>
             </div>
             <div class="col-md-4" >
-              <div class="form-group" >
-                <label for="phone_number">Kode Pos</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="kode_pos"
-                  name="kode_pos"
-                  value="{{ old('kode_pos') }}"
-                  required
-                />
+              <div class="form-group">
+                <label for="address_one">Alamat Lengkap</label>
+                <textarea name="address" id="address" class="form-control"  required cols="30" placeholder="Masukan Alamat Lengkap" rows="2">{{old('address')}}
+                </textarea>
               </div>
             </div>
           </div>
           <div class="row">
             
-            <div class="col-md-4">
+            <div class="col-md-3">
               <div class="form-group">
-                <label for="province">Province</label>
+                <label for="province">Provinsi</label>
                 <select name="provinces_id"  id="select" v-if="provinces" v-model="provinces_id" class="form-control">
                 <option v-for="province in provinces" :value="province.id">@{{ province.name }}</option>
                 </select>
                 <select v-else class="form-control"></select>
               </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
               <div class="form-group">
-                <label for="fk_regencies_id">City</label>
+                <label for="fk_regencies_id">Kota / Kabupaten</label>
                <select name="regencies_id" @change="getKab()"  v-if="regencies" v-model="regencies_id" required class="form-control">
                 <option v-for="regencie in regencies" :value="regencie.id">@{{ regencie.name }}</option>
                 </select>
                 <select v-else class="form-control"></select>
               </div>
             </div>
-            <div class="col-md-4" >
+            <div class="col-md-3" >
               <div class="form-group">
-                <label for="fk_regencies_id">Kabupaten</label>
+                <label for="fk_regencies_id">Kecamatan</label>
                <select name="district_id"    v-if="districts" v-model="district_id" required class="form-control">
                 <option v-for="district in districts" :value="district.id">@{{ district.name }}</option>
                 </select>
                 <select v-else class="form-control">Tidak ada data</select>
+              </div>
+            </div>
+            <div class="col-md-3" >
+              <div class="form-group">
+                <label for="fk_regencies_id">Kode Pos</label>
+                <input type="text" name="kode_pos" value="{{ old('kode_pos') }}" class="form-control" placeholder="Masukan Kode pos" required id="">
               </div>
             </div>
           </div>

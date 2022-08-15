@@ -53,8 +53,14 @@ class DashboardUserController extends Controller
 
     public function setting()
     {
-        $provinces = Province::all();
-        return view('pages.user.setting', compact('provinces'));
+        return view('pages.user.setting');
+    }
+
+    public function settingAlamat(Request $request)
+    {
+        $provinces = Province::orderBy('name', 'asc')->get();
+
+        return view('pages.user.alamat', compact('provinces'));
     }
 
     public function updateUser(Request $request)
@@ -66,9 +72,6 @@ class DashboardUserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
             'phone' => 'required|string|max:255',
-            'address' => 'required|string|max:255',
-            'province_id' => 'required|integer',
-            'regencies_id' => 'required|integer',
         ]);
 
         // jika password kosong
@@ -82,22 +85,35 @@ class DashboardUserController extends Controller
                 'email'     => $request->input('email'),
                 'phone'     => $request->input('phone'),
                 'password' => bcrypt($request->input('password')),
-                'address'   => $request->input('address'),
-                'province_id' => $request->input('province_id'),
-                'regencies_id' => $request->input('regencies_id'),
+
             ]);
         } else {
             $user->update([
                 'name'      => $request->input('name'),
                 'email'     => $request->input('email'),
                 'phone'     => $request->input('phone'),
-                'address'   => $request->input('address'),
-                'province_id' => $request->input('province_id'),
-                'regencies_id' => $request->input('regencies_id'),
+
             ]);
         }
 
 
         return redirect()->route('setting.user.index')->with('success', 'Data berhasil diupdate');
+    }
+
+    public function updateAlamatUser(Request $request)
+    {
+        $user = Auth::user();
+
+        $this->validate($request, [
+            'address' => 'required|string|max:255',
+            'province_id' => 'required|integer',
+            'regencies_id' => 'required|integer',
+        ]);
+        $user->update([
+            'address'   => $request->input('address'),
+            'province_id' => $request->input('province_id'),
+            'regencies_id' => $request->input('regencies_id'),
+        ]);
+        return redirect()->route('setting.alamat')->with('success', 'Data berhasil diupdate');
     }
 }

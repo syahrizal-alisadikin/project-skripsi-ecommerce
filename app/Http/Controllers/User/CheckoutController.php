@@ -40,6 +40,7 @@ class CheckoutController extends Controller
                 'user_id'       => $user->id,
                 'total_price'   => $request->total_price,
                 'status'        => 'pending',
+                'name'          => $request->name,
                 'phone'         => $request->phone_number,
                 'kode_pos'      => $request->kode_pos,
                 'address'       => $request->address,
