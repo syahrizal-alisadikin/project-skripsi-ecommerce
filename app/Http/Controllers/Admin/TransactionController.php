@@ -42,7 +42,10 @@ class TransactionController extends Controller
                 ->editColumn('total_price', function ($data) {
                     return moneyFormat($data->total_price);
                 })
-                ->rawColumns(['action', 'status'])
+                ->addColumn('user.name', function ($data) {
+                    return $data->user->name ?? "-";
+                })
+                ->rawColumns(['action', 'status', 'user.name'])
                 ->make(true);
         }
 

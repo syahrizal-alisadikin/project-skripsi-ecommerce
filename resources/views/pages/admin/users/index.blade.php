@@ -56,11 +56,7 @@
             },
          
             columns: [                   
-                { "data": "id", "name": "id",
-                render: function (data, type, row, meta) {
-                    return meta.row + meta.settings._iDisplayStart + 1;
-                }
-                },
+                { data: 'DT_RowIndex', name:'DT_RowIndex'},
                 {
                     data: 'name',
                     name: 'name'
@@ -96,7 +92,18 @@
                     "targets": 2, // your case first column
                     "className": "text-center",
                 },
-               
+                {
+                    "targets": 3, // your case first column
+                    "className": "text-center",
+                },
+                {
+                    "targets": 4, // your case first column
+                    "className": "text-center",
+                },
+                {
+                    "targets": 5, // your case first column
+                    "className": "text-center",
+                },
              
                
                
@@ -121,7 +128,7 @@
                 if (isConfirm) {
                     //ajax delete
                     jQuery.ajax({
-                        url: "/dashboard/admin/"+id,
+                        url: "/admin/users/"+id,
                         data:   {
                             "id": id,
                             "_token": token

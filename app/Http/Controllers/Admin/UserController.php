@@ -16,26 +16,25 @@ class UserController extends Controller
      */
     public function index()
     {
-        if(request()->ajax())
-        {
-            $query = User::where('roles','USER');
+        if (request()->ajax()) {
+            $query = User::query()->where('roles', 'USER')->latest()->get();
             return DataTables::of($query)
-            ->addIndexColumn()
-            ->addColumn('action', function ($data) {
+                ->addIndexColumn()
+                ->addColumn('action', function ($data) {
 
-                $edit = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">Edit</a>';
-                $delete = '<a href="javascript:void(0)" onClick="Delete(this.id)" id="' . $data->email . '" class="delete btn btn-danger btn-sm">Delete </a>';
+                    $edit = '<a href="' . route('admin.users.edit', $data->id) . '" class="edit btn btn-primary btn-sm">Edit</a>';
+                    $delete = '<a href="javascript:void(0)" onClick="Delete(this.id)" id="' . $data->id . '" class="delete btn btn-danger btn-sm">Delete </a>';
 
-                return $edit . ' ' . $delete;
-            })
-            ->editColumn('created_at', function ($row) {
-                return $row->created_at->diffForHumans();
-            })
-            ->editColumn('phone', function ($row) {
-                return $row->phone ?? '-';
-            })
-            ->rawColumns(['action'])
-            ->make(true); 
+                    return $edit . ' ' . $delete;
+                })
+                ->editColumn('created_at', function ($row) {
+                    return $row->created_at->diffForHumans();
+                })
+                ->editColumn('phone', function ($row) {
+                    return $row->phone ?? '-';
+                })
+                ->rawColumns(['action'])
+                ->make(true);
         }
 
         return view('pages.admin.users.index');
@@ -81,7 +80,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        // edit user    
+        $user = User::find($id);
+        return view('pages.admin.users.edit', compact('user'));
     }
 
     /**
@@ -93,7 +94,16 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // update user
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $id,
+            'phone' => 'required|string|max:255',
+
+        ]);
+        $user = User::find($id);
+        $user->update($request->all());
+        return redirect()->route('admin.users.index')->with('success', 'User Berhasil Diupdate');
     }
 
     /**
@@ -104,6 +114,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // delete user 
+        $user = User::find($id);
+        $user->delete();
+        return response()->json(['status' => 'success']);
     }
 }

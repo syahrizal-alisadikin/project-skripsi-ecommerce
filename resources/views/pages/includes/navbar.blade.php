@@ -46,7 +46,7 @@ data-aos="fade-down"
     </ul>
     @auth
     <ul class="navbar-nav  d-none d-lg-flex">
-           <li class="nav-item dropdown {{ setActive('user') }}">
+           <li class="nav-item dropdown ">
             <a class="btn  dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="fa fa-user"></i>
             </a>
