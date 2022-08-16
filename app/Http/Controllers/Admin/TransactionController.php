@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Province;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use DataTables;
@@ -22,7 +23,7 @@ class TransactionController extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function ($data) {
 
-                    $edit = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">Show</a>';
+                    $edit = '<a href="' . route('admin.transactions.edit', $data->id) . '" class="edit btn btn-primary btn-sm">Show</a>';
                     $delete = "";
                     if ($data->status == 'failed') {
                         $delete = '<a href="javascript:void(0)" onClick="Delete(this.id)" id="' . $data->id . '" class="delete btn btn-danger btn-sm">Delete </a>';
@@ -42,10 +43,8 @@ class TransactionController extends Controller
                 ->editColumn('total_price', function ($data) {
                     return moneyFormat($data->total_price);
                 })
-                ->addColumn('user.name', function ($data) {
-                    return $data->user->name ?? "-";
-                })
-                ->rawColumns(['action', 'status', 'user.name'])
+
+                ->rawColumns(['action', 'status'])
                 ->make(true);
         }
 
@@ -81,8 +80,7 @@ class TransactionController extends Controller
      */
     public function show($id)
     {
-        $transaction = Transaction::with('transaction_details')->find($id);
-        return "otw ya";
+        // 
     }
 
     /**
@@ -93,7 +91,9 @@ class TransactionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $transaction = Transaction::with('transaction_details')->find($id);
+        $provinces = Province::orderBy('name', 'asc')->get();
+        return view('pages.admin.transactions.edit', compact('transaction', 'provinces'));
     }
 
     /**
@@ -105,7 +105,22 @@ class TransactionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // update transactions
+        // validasi
+        $this->validate($request, [
+            'name' => 'required',
+            'phone' => 'required',
+            'address' => 'required',
+            'province_id' => 'required',
+            'regencies_id' => 'required',
+            'kode_pos' => 'required',
+            'status' => 'required',
+            'total_price' => 'required',
+        ]);
+        $transaction = Transaction::find($id);
+        $transaction->update($request->all());
+
+        return redirect()->route('admin.transactions.index')->with('success', 'Data berhasil diupdate');
     }
 
     /**

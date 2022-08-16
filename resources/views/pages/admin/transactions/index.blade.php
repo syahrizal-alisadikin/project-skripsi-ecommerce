@@ -68,8 +68,8 @@
                 },
                 
                 {
-                    data: 'user.name',
-                    name: 'user.name'
+                    data: 'name',
+                    name: 'name'
                 },
                 {
                     data: 'total_price',

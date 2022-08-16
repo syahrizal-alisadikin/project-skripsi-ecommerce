@@ -15,13 +15,7 @@
  <script src="{{ asset('assets/js/scripts.js') }}"></script>
  <script src="{{ asset('assets/js/custom.js') }}"></script>
  <script>
-     //active select2
-     $(document).ready(function () {
-         $('#select').select2({
-             theme: 'bootstrap4',
-             width: 'style',
-         });
-     });
+    
      //flash message
      @if(session()->has('success'))
      swal({

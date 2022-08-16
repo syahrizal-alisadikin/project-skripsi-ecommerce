@@ -146,6 +146,12 @@
 @push('after-script')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.6.2/tinymce.min.js"></script>
 <script>
+    $(document).ready(function () {
+         $('select').select2({
+             theme: 'bootstrap4',
+             width: 'style',
+         });
+     });
     var editor_config = {
         selector: "textarea.description",
         plugins: [
