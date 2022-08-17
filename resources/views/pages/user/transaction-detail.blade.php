@@ -194,7 +194,7 @@
 @endsection
 
 @push('after-script')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.6.2/tinymce.min.js"></script>
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.6.2/tinymce.min.js"></script>
 <script>
     var editor_config = {
         selector: "textarea.address",
@@ -210,4 +210,4 @@
 
     tinymce.init(editor_config);
 </script>
-@endpush
+@endpush --}}
