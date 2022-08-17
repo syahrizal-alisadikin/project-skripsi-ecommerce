@@ -97,7 +97,7 @@
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="address_one">Alamat</label>
-                    <textarea name="address" id="address" class="form-control address" required cols="30" placeholder="Masukan Alamat pengiriman" rows="2">{!! $transaction->address !!}
+                    <textarea name="address" id="address" class="form-control address" required cols="30" placeholder="Masukan Alamat pengiriman" rows="1">{!! $transaction->address !!}
                     </textarea>
                   </div>
                 </div> 
@@ -194,7 +194,7 @@
 @endsection
 
 @push('after-script')
-{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.6.2/tinymce.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.6.2/tinymce.min.js"></script>
 <script>
     var editor_config = {
         selector: "textarea.address",
@@ -210,4 +210,4 @@
 
     tinymce.init(editor_config);
 </script>
-@endpush --}}
+@endpush
