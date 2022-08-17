@@ -2,7 +2,7 @@
 
 @section('content-page')
 <div class="container-fluid" style="padding: 100px 50px">
-    <div class="row justify-content-between">
+    <div class="row justify-content-center">
         {{-- <div class="col-md-3">
             @include('pages.includes.sidebar')
         </div> --}}
@@ -14,7 +14,7 @@
                         @csrf
                         @method('PUT')
                         <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="form-group mb-2">
                                         <label>Name</label>
                                         <input type="text" name="name" value="{{ old('name',Auth::user()->name) }}" placeholder="Masukkan Name"

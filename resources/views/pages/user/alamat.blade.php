@@ -14,7 +14,7 @@
                         @csrf
                         @method('PUT')
                         <div class="row">
-                                <div class="col-md-6" >
+                                <div class="col-md-12" >
                                     <div class="form-group mb-2">
                                        <label>Address</label>
                                        <textarea name="address" id="address" class="form-control address" placeholder="Masukan address" cols="30" rows="5">{{ old('address',Auth::user()->address) }}
