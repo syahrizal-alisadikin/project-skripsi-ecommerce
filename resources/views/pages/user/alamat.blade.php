@@ -2,11 +2,11 @@
 
 @section('content-page')
 <div class="container-fluid" style="padding: 100px 50px">
-    <div class="row">
+    <div class="row justify-content-center">
         {{-- <div class="col-md-3">
             @include('pages.includes.sidebar')
         </div> --}}
-        <div class="col-md-12">
+        <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
                     <h3>Pengaturan Alamat {{ Auth::user()->name }}</h3>
