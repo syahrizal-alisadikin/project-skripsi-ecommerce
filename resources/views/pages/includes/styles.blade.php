@@ -12,4 +12,5 @@
 <link href="{{ asset('assets/style/main.css') }}" rel="stylesheet" />
 <script src="{{ asset('assets/js/sweetalert.min.js') }}"></script>
 
+
 <title>{{ $titlePage ?? config('app.name') }}</title>

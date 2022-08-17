@@ -1,6 +1,35 @@
 @extends('layouts.app', ['titlePage' => 'Ecommerce'])
-
+@push('after-style')
+<style>
+    .whole-page-overlay{
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        position: fixed;
+        background: rgba(0,0,0,0.6);
+        width: 100%;
+        height: 100% !important;
+        z-index: 1050;
+        display: none;
+        }
+        .whole-page-overlay .center-loader{
+        top: 50%;
+        left: 52%;
+        position: absolute;
+        color: white;
+        }
+ </style>
+@endpush
 @section('content-page')
+<div class="whole-page-overlay">
+
+    <div class="tenor-gif-embed center-loader" data-postid="25192894" data-share-method="host" data-aspect-ratio="1" data-width="5%">
+        <a href="#" class="btn btn-success">Loading...</a>
+        <img src="{{ asset('assets/img/loading.gif') }}" alt="">
+    </div> 
+</div>
+
 <div class="page-content page-home">
 
     <section class="information">
@@ -35,18 +64,18 @@
                                               </div>
                                             <div class="mb-3">
                                               <label  class="form-label">Email address</label>
-                                              <input type="email" name="email" class="form-control" required placeholder="Masukan Email">
+                                              <input type="email" name="email" class="form-control" id="email" required placeholder="Masukan Email">
                                             </div>
                                             <div class="mb-3">
                                               <label for="exampleInputPassword1" class="form-label">Message</label>
-                                                <textarea name="message" id="message" required class="form-control" cols="30" rows="5" placeholder="Masukan Message"></textarea>
+                                                <textarea name="message" id="message" required class="form-control" cols="30" id="address" rows="5" placeholder="Masukan Message"></textarea>
                                             </div>
                                             <div class="mb-3 form-check">
                                               <input type="checkbox" name="copy" class="form-check-input" id="exampleCheck1">
                                               <label class="form-check-label" for="exampleCheck1">Send me a copy of this message</label>
                                             </div>
                                             <div class="d-grid gap-2">
-                                                <button class="btn btn-primary" type="submit">Send</button>
+                                                <button class="btn btn-primary" id="btn-submit" type="submit">Send</button>
                                               </div>
                                           </form>
                                     </div>
@@ -105,3 +134,21 @@
 </div>
 
 @endsection
+@push('after-script')
+    <script>
+        $(document).ready(function(){
+            // jika name not empty
+            $("#btn-submit").on("click", function(){
+                if($('#name').val() != '' && $('#email').val() != '' && $('#address').val() != ''){
+                    // jika checkbox checked
+                    $('.whole-page-overlay').show();
+                    
+                }
+                
+            });
+               
+                
+            
+        });
+    </script>
+@endpush

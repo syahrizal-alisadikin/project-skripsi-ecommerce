@@ -5,6 +5,7 @@
 
     <!-- Bootstrap CSS -->
     @include('pages.includes.styles')
+    @stack('after-style')
 
   </head>
   <body>
