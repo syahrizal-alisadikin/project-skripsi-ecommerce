@@ -97,7 +97,7 @@
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="address_one">Alamat</label>
-                    <textarea name="address" id="address" class="form-control" required cols="30" placeholder="Masukan Alamat pengiriman" rows="2">{{ $transaction->address }}
+                    <textarea name="address" id="address" class="form-control" required cols="30" placeholder="Masukan Alamat pengiriman" rows="2">{!! $transaction->address !!}
                     </textarea>
                   </div>
                 </div> 
