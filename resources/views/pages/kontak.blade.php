@@ -15,7 +15,42 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-8 mb-5 mb-lg-0">
-                              logo
+                                <div class="row justify-content-center">
+                                    <div class="col-md-6">
+                                        @if ($errors->any())
+                                            <div class="alert alert-danger">
+                                                <ul>
+                                                    @foreach ($errors->all() as $error)
+                                                        <li>{{ $error }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                            
+                                        @endif
+                                        <form action="{{ route('send-email') }}" method="POST">
+                                            @csrf
+                                            <div class="mb-3">
+                                                <label for="name" class="form-label">Name</label>
+                                                <input type="text" name="name" class="form-control" id="name" required placeholder="masukan name">
+                                              </div>
+                                            <div class="mb-3">
+                                              <label  class="form-label">Email address</label>
+                                              <input type="email" name="email" class="form-control" required placeholder="Masukan Email">
+                                            </div>
+                                            <div class="mb-3">
+                                              <label for="exampleInputPassword1" class="form-label">Message</label>
+                                                <textarea name="message" id="message" required class="form-control" cols="30" rows="5" placeholder="Masukan Message"></textarea>
+                                            </div>
+                                            <div class="mb-3 form-check">
+                                              <input type="checkbox" name="copy" class="form-check-input" id="exampleCheck1">
+                                              <label class="form-check-label" for="exampleCheck1">Send me a copy of this message</label>
+                                            </div>
+                                            <div class="d-grid gap-2">
+                                                <button class="btn btn-primary" type="submit">Send</button>
+                                              </div>
+                                          </form>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="contact-form-wrap">

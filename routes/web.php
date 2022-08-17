@@ -34,6 +34,8 @@ Route::get('midtrans/success', [HomeController::class, 'success'])->name('midtra
 Route::get('midtrans/unfinish', [HomeController::class, 'unfinish'])->name('midtrans.unfinish');
 Route::get('midtrans/error', [HomeController::class, 'error'])->name('midtrans.error');
 
+Route::post('send-email', [HomeController::class, 'sendEmail'])->name('send-email');
+
 Route::prefix('admin')
     ->middleware('isAdmin')
     ->name('admin.')

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SendMail;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
@@ -72,5 +74,23 @@ class HomeController extends Controller
     public function error()
     {
         return view('pages.error');
+    }
+
+    public function sendEmail(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+            'message' => 'required|string|max:255',
+        ]);
+        $data = $request->all();
+        if ($request->copy) {
+            Mail::to($request->email)->send(new SendMail($data));
+        }
+
+        Mail::to("syahrizalalisadikin1997@gmail.com")->send(new SendMail($data));
+
+
+        return redirect()->back()->with('success', 'Terimakasih telah mengirim pesan');
     }
 }
