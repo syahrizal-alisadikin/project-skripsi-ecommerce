@@ -97,7 +97,7 @@
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="address_one">Alamat</label>
-                    <textarea name="address" id="address" class="form-control" required cols="30" placeholder="Masukan Alamat pengiriman" rows="2">{!! $transaction->address !!}
+                    <textarea name="address" id="address" class="form-control address" required cols="30" placeholder="Masukan Alamat pengiriman" rows="2">{!! $transaction->address !!}
                     </textarea>
                   </div>
                 </div> 
@@ -193,3 +193,21 @@
 
 @endsection
 
+@push('after-script')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.6.2/tinymce.min.js"></script>
+<script>
+    var editor_config = {
+        selector: "textarea.address",
+        plugins: [
+            "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+            "searchreplace wordcount visualblocks visualchars code fullscreen",
+            "insertdatetime media nonbreaking save table contextmenu directionality",
+            "emoticons template paste textcolor colorpicker textpattern"
+        ],
+        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media",
+        relative_urls: false,
+    };
+
+    tinymce.init(editor_config);
+</script>
+@endpush
