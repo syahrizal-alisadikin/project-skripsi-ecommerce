@@ -48,11 +48,12 @@ data-aos="fade-down"
     <ul class="navbar-nav  d-none d-lg-flex">
            <li class="nav-item dropdown ">
             <a class="btn  dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="fa fa-user"></i>
+              Hi {{ Auth::user()->name }}
             </a>
             <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{{ route('transactions.user.index') }}">Transaction</a></li>
               <li><a class="dropdown-item" href="{{ route('setting.alamat') }}">Pengaturan alamat</a></li>
-              <li><a class="dropdown-item" href="{{ route('setting.user.index') }}">Pengaturan akun</a></li>
+              <li><a class="dropdown-item" href="{{ route('setting.user.index') }}">Setting akun</a></li>
               <li>
                 <a class="dropdown-item" onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();"
