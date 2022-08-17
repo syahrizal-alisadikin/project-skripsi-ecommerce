@@ -3,10 +3,10 @@
 @section('content-page')
 <div class="container-fluid" style="padding: 100px 50px">
     <div class="row">
-        <div class="col-md-3">
+        {{-- <div class="col-md-3">
             @include('pages.includes.sidebar')
-        </div>
-        <div class="col-md-9">
+        </div> --}}
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
                     <h4> Transactions {{ Auth::user()->name }}</h4>
