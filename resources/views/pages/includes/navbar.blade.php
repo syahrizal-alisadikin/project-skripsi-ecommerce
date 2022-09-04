@@ -4,7 +4,7 @@ data-aos="fade-down"
 >
 <div class="container">
   <a class="navbar-brand" href="/">
-    <!-- <img src="/images/logo.svg" alt="" /> -->
+    <img src="{{ asset('assets/img/logo.jpeg') }}" style="max-width: 70px" alt="logo" /> 
   </a>
   {{-- <button
     class="navbar-toggler"
@@ -83,7 +83,7 @@ style="cursor: pointer" href="javascript:void(0)">Logout</a>
          <!-- Mobile Menu -->
          <ul class="navbar-nav d-block d-lg-none mt-3">
            <li class="nav-item">
-             <a class="nav-link" href="#">
+             <a class="nav-link" href="{{ route('setting.user.index') }}">
                Hi, {{Auth::user()->name}}
              </a>
            </li>

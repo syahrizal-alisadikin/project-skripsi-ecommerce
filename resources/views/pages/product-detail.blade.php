@@ -1,5 +1,14 @@
 @extends('layouts.app', ['titlePage' => 'Ecommerce - Product ' . $product->name])
-
+@push('after-style')
+    <style>
+      @media only screen and (max-width: 600px) {
+ .thumbnail-image{
+      max-width: 150px !important;
+      max-height: 150px !important;
+ }
+}
+    </style>
+@endpush
 @section('content-page')
 <div class="page-content page-details" id="gallery">
     <section
@@ -31,13 +40,13 @@
                 :key="photos[activePhoto].id"
                 :src="photos[activePhoto].url"
                 class=" main-image"
-                style="width: 550px; max-height: 400px;"
+                style="max-width: 250px; max-height: 250px;"
                 alt=""
               />
             </transition>
             <div class="row mt-2">
                 <div
-                class="col-12 col-md-3 col-lg-3"
+                class=" col-md-3  col-3"
                 v-for="(photo, index) in photos"
                 :key="photo.id"
                 data-aos="zoom-in"

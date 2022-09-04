@@ -1,7 +1,8 @@
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="{{ route('admin.dashboard.index') }}">Eccomerce</a>
+            <a href="{{ route('admin.dashboard.index') }}">    <img src="{{ asset('assets/img/logo.jpeg') }}" style="max-width: 70px" alt="logo" /> 
+            </a>
         </div>
         {{-- <div class="sidebar-brand sidebar-brand-sm">
             <a href="{{ route('dashboard.index') }}"><i class="fas fa-user" aria-hidden="true"></i></a>
