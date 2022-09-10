@@ -22,6 +22,20 @@
                             <form action="{{ route('admin.transactions.update',$transaction->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
+                                <div class="row">
+                                    @foreach ($transaction->transaction_details as $item)
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="name">Nama Barang</label>
+                                                <input type="text" name="name" id="name" class="form-control" value="{{ $item->product->name }}" readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="name">Harga</label>
+                                                <input type="text" name="name" id="name" class="form-control" value="{{ $item->price }}" readonly>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
                                     <div class="form-group">
                                         <label>Name</label>
                                         <input type="text" name="name" value="{{ old('name',$transaction->name) }}" placeholder="Masukkan Name"
