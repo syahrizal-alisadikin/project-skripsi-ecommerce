@@ -31,7 +31,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="name">Harga</label>
-                                                <input type="text" name="name" id="name" class="form-control" value="{{ $item->price }}" readonly>
+                                                <input type="text" name="name" id="name" class="form-control" value="{{ $item->price }} x {{ $item->quantity }}" readonly>
                                             </div>
                                         </div>
                                     @endforeach
