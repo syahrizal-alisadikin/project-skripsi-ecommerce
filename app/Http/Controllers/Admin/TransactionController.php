@@ -51,11 +51,12 @@ class TransactionController extends Controller
                         return '<span class="badge badge-danger">Cancel</span>';
                     }
                 })
-                ->editColumn('total_price', function ($data) {
-                    return moneyFormat($data->total_price);
-                })
+
                 ->editColumn('resi', function ($data) {
                     return $data->resi ?? '-';
+                })
+                ->editColumn('total_price', function ($data) {
+                    return moneyFormat($data->total_price);
                 })
 
                 ->rawColumns(['action', 'status', 'status_pengiriman'])

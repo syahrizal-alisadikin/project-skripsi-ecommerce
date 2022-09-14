@@ -38,13 +38,13 @@ class DashboardUserController extends Controller
                 })
                 ->editColumn('status_pengiriman', function ($data) {
                     if ($data->status_pengiriman == "PENDING") {
-                        return '<span class="badge badge-warning">Pending</span>';
+                        return '<span class="badge bg-warning">Pending</span>';
                     } else if ($data->status_pengiriman == "SHIPPING") {
-                        return '<span class="badge badge-info">Shipping</span>';
+                        return '<span class="badge bg-info">Shipping</span>';
                     } else if ($data->status_pengiriman == "SUCCESS") {
-                        return '<span class="badge badge-success">Success</span>';
+                        return '<span class="badge bg-success">Success</span>';
                     } else if ($data->status_pengiriman == "CANCEL") {
-                        return '<span class="badge badge-danger">Cancel</span>';
+                        return '<span class="badge bg-danger">Cancel</span>';
                     }
                 })
 
