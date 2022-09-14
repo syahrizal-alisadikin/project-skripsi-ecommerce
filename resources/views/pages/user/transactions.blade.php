@@ -21,6 +21,8 @@
                                 <th scope="col" style="text-align: center;width: 6%">NO.</th>
                                 <th scope="col">Kode Transaksi</th>
                                 <th scope="col">Nominal</th>
+                                <th scope="col">Status Pengiriman</th>
+                                <th scope="col">Resi</th>
                                 <th scope="col">Status</th>
                                 <th scope="col" style="width: 15%;text-align: center">AKSI</th>
                             </tr>
@@ -62,6 +64,14 @@
                 {
                     data: 'total_price',
                     name: 'total_price'
+                },
+                {
+                    data: 'status_pengiriman',
+                    name: 'status_pengiriman'
+                },
+                {
+                    data: 'resi',
+                    name: 'resi'
                 },
                 {
                     data: 'status',

@@ -121,7 +121,31 @@
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label>Status</label>
+                                        <label for="">No Resi</label>
+                                        <input type="text" name="resi" value="{{ old('resi',$transaction->resi) }}" class="form-control @error('resi') is-invalid @enderror" placeholder="Masukan No Resi">
+                                        @error('resi')
+                                        <div class="invalid-feedback" style="display: block">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Status Pengiriman</label>
+                                        <select name="status_pengiriman" id="status" class="form-control @error('status_pengiriman') is-invalid @enderror">
+                                            <option value="">Pilih Status</option>
+                                            <option value="PENDING" {{ $transaction->status_pengiriman == 'PENDING' ? 'selected' : '' }}>PENDING</option>
+                                            <option value="SUCCESS" {{ $transaction->status_pengiriman == 'SUCCESS' ? 'selected' : '' }}>SUCCESS</option>
+                                            <option value="SHIPPING" {{ $transaction->status_pengiriman == 'SHIPPING' ? 'selected' : '' }}>SHIPPING</option>
+                                            <option value="CANCEL" {{ $transaction->status_pengiriman == 'CANCEL' ? 'selected' : '' }}>CANCEL</option>
+                                        </select>
+                                        @error('status_pengiriman')
+                                        <div class="invalid-feedback" style="display: block">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Status Pembayaran</label>
                                         <select name="status" id="select" class="form-control @error('status') is-invalid @enderror">
                                             <option value="">Pilih Status</option>
                                             <option value="pending" {{ $transaction->status == 'pending' ? 'selected' : '' }}>Pending</option>

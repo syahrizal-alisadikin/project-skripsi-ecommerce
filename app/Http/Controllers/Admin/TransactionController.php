@@ -40,11 +40,25 @@ class TransactionController extends Controller
                         return '<span class="badge badge-danger">Failed</span>';
                     }
                 })
+                ->editColumn('status_pengiriman', function ($data) {
+                    if ($data->status_pengiriman == "PENDING") {
+                        return '<span class="badge badge-warning">Pending</span>';
+                    } else if ($data->status_pengiriman == "SHIPPING") {
+                        return '<span class="badge badge-info">Shipping</span>';
+                    } else if ($data->status_pengiriman == "SUCCESS") {
+                        return '<span class="badge badge-success">Success</span>';
+                    } else if ($data->status_pengiriman == "CANCEL") {
+                        return '<span class="badge badge-danger">Cancel</span>';
+                    }
+                })
                 ->editColumn('total_price', function ($data) {
                     return moneyFormat($data->total_price);
                 })
+                ->editColumn('resi', function ($data) {
+                    return $data->resi ?? '-';
+                })
 
-                ->rawColumns(['action', 'status'])
+                ->rawColumns(['action', 'status', 'status_pengiriman'])
                 ->make(true);
         }
 
@@ -116,6 +130,8 @@ class TransactionController extends Controller
             'kode_pos' => 'required',
             'status' => 'required',
             'total_price' => 'required',
+            'resi' => 'required',
+            'status_pengiriman' => 'required',
         ]);
         $transaction = Transaction::find($id);
         $transaction->update($request->all());

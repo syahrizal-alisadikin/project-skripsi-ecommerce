@@ -25,7 +25,9 @@
                                 <th scope="col">KODE</th>
                                 <th scope="col">NAME</th>
                                 <th scope="col">NOMINAL</th>
-                                <th scope="col">STATUS</th>
+                                <th scope="col">STATUS PENGIRIMAN</th>
+                                <th scope="col">RESI</th>
+                                <th scope="col">STATUS PEMBAYARAN</th>
                               
                                 
                                 <th scope="col" style="width: 15%;text-align: center">AKSI</th>
@@ -76,6 +78,14 @@
                     name: 'total_price'
                 },
                 {
+                    data: 'status_pengiriman',
+                    name: 'status_pengiriman'
+                }, 
+                {
+                    data: 'resi',
+                    name: 'resi'
+                },  
+                {
                     data: 'status',
                     name: 'status'
                 },
@@ -109,6 +119,14 @@
                 },
                 {
                     "targets": 5, // your case first column
+                    "className": "text-center",
+                },
+                {
+                    "targets": 6, // your case first column
+                    "className": "text-center",
+                },
+                {
+                    "targets": 7, // your case first column
                     "className": "text-center",
                 },
                

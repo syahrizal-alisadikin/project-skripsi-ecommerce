@@ -36,10 +36,25 @@ class DashboardUserController extends Controller
                     }
                     return $status;
                 })
+                ->editColumn('status_pengiriman', function ($data) {
+                    if ($data->status_pengiriman == "PENDING") {
+                        return '<span class="badge badge-warning">Pending</span>';
+                    } else if ($data->status_pengiriman == "SHIPPING") {
+                        return '<span class="badge badge-info">Shipping</span>';
+                    } else if ($data->status_pengiriman == "SUCCESS") {
+                        return '<span class="badge badge-success">Success</span>';
+                    } else if ($data->status_pengiriman == "CANCEL") {
+                        return '<span class="badge badge-danger">Cancel</span>';
+                    }
+                })
+
+                ->editColumn('resi', function ($data) {
+                    return $data->resi ?? '-';
+                })
                 ->editColumn('total_price', function ($row) {
                     return moneyFormat($row->total_price);
                 })
-                ->rawColumns(['action', 'status', 'total_price'])
+                ->rawColumns(['action', 'status', 'total_price', 'status_pengiriman'])
                 ->make(true);
         }
         return view('pages.user.transactions');
